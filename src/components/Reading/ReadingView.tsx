@@ -171,8 +171,8 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
     return (
       <motion.p
         key={index}
-        className={`text-lg text-gray-800 leading-relaxed mb-6 select-none reading-content rounded-lg transition-colors ${
-          isPressed ? 'bg-blue-50' : ''
+        className={`text-lg text-gray-800 dark:text-gray-200 leading-relaxed mb-6 select-none reading-content rounded-lg transition-colors ${
+          isPressed ? 'bg-blue-50 dark:bg-blue-900' : ''
         }`}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -198,7 +198,7 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
                   <span
                     key={wIndex}
                     onClick={() => handleWordClick(word, sentence.trim())}
-                    className="cursor-pointer hover:bg-blue-50 hover:text-[#1CB0F6] rounded px-0.5 transition-colors"
+                    className="cursor-pointer hover:bg-blue-50 dark:hover:bg-blue-900 hover:text-[#1CB0F6] rounded px-0.5 transition-colors"
                   >
                     {word}
                   </span>
@@ -212,18 +212,18 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white z-40 border-b border-gray-100">
+      <header className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 z-40 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
           <motion.button
             onClick={onBack}
-            className="text-gray-500 font-medium"
+            className="text-gray-500 dark:text-gray-400 font-medium"
             whileTap={{ scale: 0.95 }}
           >
             ← Back
           </motion.button>
-          <span className="font-bold text-gray-900 text-sm truncate max-w-[120px]">{chapter.title}</span>
+          <span className="font-bold text-gray-900 dark:text-white text-sm truncate max-w-[120px]">{chapter.title}</span>
           <div className="flex items-center gap-2">
             <motion.button
               onClick={handleReadAloud}
@@ -247,7 +247,7 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
           </div>
         </div>
         {/* Progress bar */}
-        <div className="h-1 bg-gray-100">
+        <div className="h-1 bg-gray-100 dark:bg-gray-700">
           <motion.div
             className="h-full bg-[#58CC02]"
             style={{ width: `${scrollProgress * 100}%` }}
@@ -270,13 +270,13 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <p className="text-gray-400 text-sm">— End of {chapter.title} —</p>
+            <p className="text-gray-400 dark:text-gray-500 text-sm">— End of {chapter.title} —</p>
           </motion.div>
         </div>
       </div>
 
       {/* Bottom action bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 p-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-700 p-4">
         <div className="max-w-2xl mx-auto">
           {chapter.quiz && chapter.quiz.length > 0 ? (
             <motion.button

@@ -115,23 +115,23 @@ export function ChapterQuiz({ questions, onComplete, onClose }: ChapterQuizProps
 
   return (
     <motion.div
-      className="fixed inset-0 bg-white z-50 flex flex-col"
+      className="fixed inset-0 bg-white dark:bg-gray-800 z-50 flex flex-col"
       initial={{ opacity: 0, y: '100%' }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: '100%' }}
     >
       {/* Header */}
-      <div className="p-4 border-b border-gray-100">
+      <div className="p-4 border-b border-gray-100 dark:border-gray-700">
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <motion.button
             onClick={onClose}
-            className="text-gray-500"
+            className="text-gray-500 dark:text-gray-400"
             whileTap={{ scale: 0.95 }}
           >
             ✕
           </motion.button>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-gray-500 dark:text-gray-400">
               {currentIndex + 1} / {questions.length}
             </span>
             <div className="flex gap-0.5">
@@ -145,7 +145,7 @@ export function ChapterQuiz({ questions, onComplete, onClose }: ChapterQuizProps
         </div>
         {/* Progress */}
         <div className="max-w-2xl mx-auto mt-3">
-          <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-[#58CC02]"
               initial={{ width: 0 }}
@@ -161,27 +161,27 @@ export function ChapterQuiz({ questions, onComplete, onClose }: ChapterQuizProps
           {/* Question */}
           <div className="text-center mb-8">
             <span className="text-3xl mb-4 block">📝</span>
-            <h2 className="text-xl font-bold text-gray-900">Comprehension Check</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Comprehension Check</h2>
           </div>
 
-          <div className="bg-gray-50 rounded-xl p-4 mb-6">
-            <p className="text-lg text-gray-800">{question.question}</p>
+          <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 mb-6">
+            <p className="text-lg text-gray-800 dark:text-gray-200">{question.question}</p>
           </div>
 
           {/* Options */}
           <div className="space-y-3 mb-6">
             {question.options.map((option, index) => {
-              let buttonClass = 'bg-white border-2 border-gray-200 text-gray-800';
+              let buttonClass = 'bg-white dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200';
 
               if (selectedIndex === index && !showResult) {
-                buttonClass = 'bg-blue-50 border-2 border-[#1CB0F6] text-gray-800';
+                buttonClass = 'bg-blue-50 dark:bg-blue-900 border-2 border-[#1CB0F6] text-gray-800 dark:text-gray-200';
               }
 
               if (showResult) {
                 if (index === question.correctIndex) {
-                  buttonClass = 'bg-green-50 border-2 border-[#58CC02] text-gray-800';
+                  buttonClass = 'bg-green-50 dark:bg-green-900 border-2 border-[#58CC02] text-gray-800 dark:text-gray-200';
                 } else if (selectedIndex === index && !isCorrect) {
-                  buttonClass = 'bg-red-50 border-2 border-[#FF4B4B] text-gray-800';
+                  buttonClass = 'bg-red-50 dark:bg-red-900 border-2 border-[#FF4B4B] text-gray-800 dark:text-gray-200';
                 }
               }
 
@@ -194,7 +194,7 @@ export function ChapterQuiz({ questions, onComplete, onClose }: ChapterQuizProps
                   whileTap={!showResult ? { scale: 0.98 } : {}}
                 >
                   <span className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-sm font-bold">
+                    <span className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center text-sm font-bold">
                       {String.fromCharCode(65 + index)}
                     </span>
                     {option}
@@ -220,14 +220,14 @@ export function ChapterQuiz({ questions, onComplete, onClose }: ChapterQuizProps
       </div>
 
       {/* Bottom action */}
-      <div className="p-4 border-t border-gray-100">
+      <div className="p-4 border-t border-gray-100 dark:border-gray-700">
         <div className="max-w-2xl mx-auto">
           <motion.button
             onClick={showResult ? handleNext : handleCheck}
             disabled={selectedIndex === null && !showResult}
             className={`w-full font-bold py-4 rounded-xl text-lg ${
               selectedIndex === null && !showResult
-                ? 'bg-gray-200 text-gray-400'
+                ? 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500'
                 : showResult
                 ? isCorrect
                   ? 'bg-[#58CC02] text-white'
