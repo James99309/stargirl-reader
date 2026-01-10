@@ -40,13 +40,8 @@ export function ChapterList({ chapters, onSelectChapter }: ChapterListProps) {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-<<<<<<< HEAD
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">📖 STARGIRL</h1>
-        <p className="text-gray-500 dark:text-gray-400">by Jerry Spinelli</p>
-=======
         <h1 className="text-3xl font-bold text-gray-900">📖 STARGIRL</h1>
         <p className="text-gray-500">by Jerry Spinelli</p>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
       </motion.div>
 
       {/* Chapter tree */}
@@ -77,17 +72,10 @@ export function ChapterList({ chapters, onSelectChapter }: ChapterListProps) {
                   status === 'completed'
                     ? 'bg-[#58CC02] text-white'
                     : status === 'current'
-<<<<<<< HEAD
-                    ? 'bg-[#1CB0F6] text-white ring-4 ring-blue-200 dark:ring-blue-800'
-                    : status === 'unlocked'
-                    ? 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 border-2 border-gray-200 dark:border-gray-600'
-                    : 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
-=======
                     ? 'bg-[#1CB0F6] text-white ring-4 ring-blue-200'
                     : status === 'unlocked'
                     ? 'bg-white text-gray-800 border-2 border-gray-200'
                     : 'bg-gray-200 text-gray-400 cursor-not-allowed'
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                 }`}
                 whileHover={!isLocked ? { scale: 1.1 } : {}}
                 whileTap={!isLocked ? { scale: 0.95 } : {}}
@@ -113,11 +101,7 @@ export function ChapterList({ chapters, onSelectChapter }: ChapterListProps) {
               {/* Status label */}
               <p
                 className={`text-center text-sm mt-2 ${
-<<<<<<< HEAD
-                  status === 'current' ? 'text-[#1CB0F6] font-medium' : 'text-gray-500 dark:text-gray-400'
-=======
                   status === 'current' ? 'text-[#1CB0F6] font-medium' : 'text-gray-500'
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                 }`}
               >
                 {status === 'completed'

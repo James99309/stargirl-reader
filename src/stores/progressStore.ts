@@ -6,7 +6,6 @@ interface ProgressState extends UserProgress {
   session: ReadingSession | null;
   username: string | null;
   lastHeartLoss: number | null; // timestamp when hearts were last lost
-  darkMode: boolean;
 
   // Actions
   startSession: (chapterId: number, sectionId: number) => void;
@@ -26,7 +25,6 @@ interface ProgressState extends UserProgress {
   resetProgress: () => void;
   setUsername: (name: string) => void;
   logout: () => void;
-  toggleDarkMode: () => void;
 }
 
 const initialState: UserProgress = {
@@ -42,7 +40,6 @@ const initialState: UserProgress = {
   achievements: [],
   wordsLearned: [],
   onboardingCompleted: false,
-  totalReadingTime: 0,
 };
 
 // Heart regeneration: 30 minutes per heart
@@ -56,7 +53,6 @@ export const useProgressStore = create<ProgressState>()(
       session: null,
       username: null,
       lastHeartLoss: null,
-      darkMode: false,
 
       startSession: (chapterId, sectionId) => {
         set({
@@ -73,12 +69,7 @@ export const useProgressStore = create<ProgressState>()(
       endSession: () => {
         const { session } = get();
         if (session) {
-          // Calculate reading time and add to total
-          const readingTimeSeconds = Math.floor((Date.now() - session.startTime) / 1000);
-          set((state) => ({
-            session: null,
-            totalReadingTime: state.totalReadingTime + readingTimeSeconds,
-          }));
+          set({ session: null });
         }
       },
 
@@ -226,7 +217,7 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       resetProgress: () => {
-        set({ ...initialState, session: null, username: null, lastHeartLoss: null, darkMode: false });
+        set({ ...initialState, session: null, username: null, lastHeartLoss: null });
       },
 
       setUsername: (name) => {
@@ -235,10 +226,6 @@ export const useProgressStore = create<ProgressState>()(
 
       logout: () => {
         set({ ...initialState, session: null, username: null, lastHeartLoss: null });
-      },
-
-      toggleDarkMode: () => {
-        set((state) => ({ darkMode: !state.darkMode }));
       },
     }),
     {

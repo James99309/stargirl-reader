@@ -42,11 +42,7 @@ export function LeaderboardView() {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 dark:bg-gray-900">
-=======
     <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50">
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div
@@ -54,11 +50,7 @@ export function LeaderboardView() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-<<<<<<< HEAD
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-2">
-=======
           <h1 className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2">
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
             <span className="text-3xl">🏆</span> Leaderboard
           </h1>
         </motion.div>
@@ -86,19 +78,11 @@ export function LeaderboardView() {
         {/* Not ranked yet */}
         {!currentUserRank && !loading && !error && (
           <motion.div
-<<<<<<< HEAD
-            className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm mb-6 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <p className="text-gray-500 dark:text-gray-400">Keep learning to appear on the leaderboard!</p>
-=======
             className="bg-white rounded-2xl p-5 shadow-sm mb-6 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             <p className="text-gray-500">Keep learning to appear on the leaderboard!</p>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
             <p className="text-sm text-gray-400 mt-1">
               Current: Lv.{currentUserLevel} · {totalXP} XP
             </p>
@@ -113,30 +97,18 @@ export function LeaderboardView() {
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
             />
-<<<<<<< HEAD
-            <p className="text-gray-500 dark:text-gray-400 mt-4">Loading leaderboard...</p>
-=======
             <p className="text-gray-500 mt-4">Loading leaderboard...</p>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
           </div>
         )}
 
         {/* Error state */}
         {error && !loading && (
           <motion.div
-<<<<<<< HEAD
-            className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <p className="text-gray-500 dark:text-gray-400 mb-4">Failed to load leaderboard</p>
-=======
             className="bg-white rounded-2xl p-6 shadow-sm text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
             <p className="text-gray-500 mb-4">Failed to load leaderboard</p>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
             <motion.button
               onClick={loadLeaderboard}
               className="px-6 py-2 bg-[#58CC02] text-white rounded-xl font-medium"
@@ -151,29 +123,17 @@ export function LeaderboardView() {
         {/* Leaderboard list */}
         {!loading && !error && (
           <motion.div
-<<<<<<< HEAD
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden"
-=======
             className="bg-white rounded-2xl shadow-sm overflow-hidden"
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
             {leaderboard.length === 0 ? (
-<<<<<<< HEAD
-              <div className="p-6 text-center text-gray-500 dark:text-gray-400">
-                No data available yet
-              </div>
-            ) : (
-              <div className="divide-y divide-gray-100 dark:divide-gray-700">
-=======
               <div className="p-6 text-center text-gray-500">
                 No data available yet
               </div>
             ) : (
               <div className="divide-y divide-gray-100">
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                 {leaderboard.map((entry, index) => {
                   const isCurrentUser = entry.username === username;
                   const rankStyle = getRankIcon(entry.rank);
@@ -182,11 +142,7 @@ export function LeaderboardView() {
                     <motion.div
                       key={entry.username}
                       className={`flex items-center gap-4 p-4 ${
-<<<<<<< HEAD
-                        isCurrentUser ? 'bg-green-50 dark:bg-green-900/30' : ''
-=======
                         isCurrentUser ? 'bg-green-50' : ''
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                       }`}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -202,20 +158,12 @@ export function LeaderboardView() {
                       {/* User info */}
                       <div className="flex-1 min-w-0">
                         <p className={`font-medium truncate ${
-<<<<<<< HEAD
-                          isCurrentUser ? 'text-[#58CC02]' : 'text-gray-900 dark:text-white'
-=======
                           isCurrentUser ? 'text-[#58CC02]' : 'text-gray-900'
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                         }`}>
                           {entry.username}
                           {isCurrentUser && ' (You)'}
                         </p>
-<<<<<<< HEAD
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-=======
                         <p className="text-sm text-gray-500">
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                           Level {entry.level}
                         </p>
                       </div>

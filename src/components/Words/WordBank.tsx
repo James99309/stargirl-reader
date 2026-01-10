@@ -81,20 +81,20 @@ function SwipeableWordCard({
         onDragEnd={handleDragEnd}
         onClick={handleClick}
         style={{ x }}
-        className="bg-white dark:bg-gray-800 p-4 shadow-sm cursor-pointer hover:shadow-md transition-shadow relative"
+        className="bg-white p-4 shadow-sm cursor-pointer hover:shadow-md transition-shadow relative"
       >
         <div className="flex items-center justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <h3 className="font-bold text-gray-900 dark:text-white">{word.word}</h3>
+              <h3 className="font-bold text-gray-900">{word.word}</h3>
               {word.isSaved && <span className="text-yellow-500">⭐</span>}
             </div>
-            <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-1">{stripChineseTranslation(word.definition)}</p>
+            <p className="text-sm text-gray-500 line-clamp-1">{stripChineseTranslation(word.definition)}</p>
           </div>
           <div className="flex items-center gap-3">
             {/* Mastery bar */}
             <div className="w-16">
-              <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                 <div
                   className={`h-full ${getMasteryColor(word.masteryLevel)}`}
                   style={{ width: `${word.masteryLevel}%` }}
@@ -159,10 +159,10 @@ export function WordBank() {
   };
 
   return (
-    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">📚 Word Bank</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">📚 Word Bank</h1>
 
         {/* Filter tabs */}
         <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
@@ -173,7 +173,7 @@ export function WordBank() {
               className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${
                 filter === f.id
                   ? 'bg-[#58CC02] text-white'
-                  : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700'
+                  : 'bg-white text-gray-600 border border-gray-200'
               }`}
               whileTap={{ scale: 0.95 }}
             >
@@ -186,7 +186,7 @@ export function WordBank() {
         {filteredWords.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-4xl mb-4">📖</p>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-gray-500">
               {filter === 'all'
                 ? 'Start reading to discover new words!'
                 : `No ${filter} words yet.`}
@@ -220,25 +220,25 @@ export function WordBank() {
                 onClick={() => setSelectedWord(null)}
               />
               <motion.div
-                className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 rounded-t-3xl z-50 p-6 max-h-[80vh] overflow-y-auto"
+                className="fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl z-50 p-6 max-h-[80vh] overflow-y-auto"
                 initial={{ y: '100%' }}
                 animate={{ y: 0 }}
                 exit={{ y: '100%' }}
               >
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+                <h2 className="text-2xl font-bold text-gray-900 mb-1">
                   {selectedWord.word}
                 </h2>
-                <p className="text-gray-500 dark:text-gray-400 mb-4">{selectedWord.phonetic}</p>
+                <p className="text-gray-500 mb-4">{selectedWord.phonetic}</p>
 
                 <div className="mb-4">
                   <p className="text-sm text-gray-400 mb-1">Definition</p>
-                  <p className="text-gray-800 dark:text-gray-200">{stripChineseTranslation(selectedWord.definition)}</p>
+                  <p className="text-gray-800">{stripChineseTranslation(selectedWord.definition)}</p>
                 </div>
 
                 {selectedWord.contexts.length > 0 && (
                   <div className="mb-4">
                     <p className="text-sm text-gray-400 mb-1">In context</p>
-                    <p className="text-gray-600 dark:text-gray-300 italic">
+                    <p className="text-gray-600 italic">
                       "{selectedWord.contexts[0].sentence}"
                     </p>
                   </div>
@@ -246,13 +246,13 @@ export function WordBank() {
 
                 <div className="mb-4">
                   <p className="text-sm text-gray-400 mb-2">Mastery Level</p>
-                  <div className="h-3 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                  <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
                     <div
                       className={`h-full ${getMasteryColor(selectedWord.masteryLevel)}`}
                       style={{ width: `${selectedWord.masteryLevel}%` }}
                     />
                   </div>
-                  <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  <div className="flex justify-between text-sm text-gray-500 mt-1">
                     <span>
                       {selectedWord.timesCorrect} correct / {selectedWord.timesIncorrect} incorrect
                     </span>
@@ -262,7 +262,7 @@ export function WordBank() {
 
                 <motion.button
                   onClick={() => setSelectedWord(null)}
-                  className="w-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 font-bold py-3 rounded-xl"
+                  className="w-full bg-gray-100 text-gray-700 font-bold py-3 rounded-xl"
                   whileTap={{ scale: 0.98 }}
                 >
                   Close

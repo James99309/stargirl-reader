@@ -33,40 +33,6 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
 
   const contentRef = useRef<HTMLDivElement>(null);
   const pressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-<<<<<<< HEAD
-  const rewardedSegmentsRef = useRef(0);
-  const { setCurrentPosition, addXP, startSession, endSession, session } = useProgressStore();
-  const { play } = useSound();
-  const { speak, stop, isSpeaking } = useTextToSpeech();
-
-  // Start session when component mounts, end when unmounts
-  useEffect(() => {
-    startSession(chapter.id, 0);
-    return () => {
-      endSession();
-      stop();
-    };
-  }, [chapter.id, startSession, endSession, stop]);
-
-  // Time-based XP reward: 50 XP every 10 minutes
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (session?.startTime) {
-        const elapsedMs = Date.now() - session.startTime;
-        const segments = Math.floor(elapsedMs / (10 * 60 * 1000)); // 10-minute segments
-
-        if (segments > rewardedSegmentsRef.current) {
-          const newSegments = segments - rewardedSegmentsRef.current;
-          addXP(newSegments * 50);
-          rewardedSegmentsRef.current = segments;
-          play('correct'); // Play sound for XP reward
-        }
-      }
-    }, 60000); // Check every minute
-
-    return () => clearInterval(timer);
-  }, [session, addXP, play]);
-=======
   const { setCurrentPosition, addXP } = useProgressStore();
   const { play } = useSound();
   const { speak, stop, isSpeaking } = useTextToSpeech();
@@ -75,7 +41,6 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
   useEffect(() => {
     return () => stop();
   }, [stop]);
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
 
   const handleReadAloud = () => {
     if (isSpeaking) {
@@ -138,22 +103,14 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
 
   const handleComplete = () => {
     setCurrentPosition(chapter.id + 1, 0);
-<<<<<<< HEAD
-    // No fixed XP reward - XP is earned through reading time
-=======
     addXP(50);
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
     play('complete');
     onComplete();
   };
 
   const handleQuizComplete = (score: number, total: number) => {
     const bonusXP = Math.round((score / total) * 30);
-<<<<<<< HEAD
-    addXP(bonusXP); // Quiz bonus XP only
-=======
     addXP(bonusXP);
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
     if (score === total) {
       play('achievement');
     } else if (score > 0) {
@@ -161,11 +118,7 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
     }
     setShowQuiz(false);
     setCurrentPosition(chapter.id + 1, 0);
-<<<<<<< HEAD
-    // No fixed completion XP - XP is earned through reading time
-=======
     addXP(50);
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
     play('complete');
 
     // Call onQuizComplete with score string
@@ -319,11 +272,7 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-<<<<<<< HEAD
-              Complete Chapter ✓
-=======
               Complete +50 XP
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
             </motion.button>
           )}
         </div>

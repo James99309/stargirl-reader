@@ -22,29 +22,11 @@ export function ProfileView() {
     achievements,
     wordsLearned,
     dailyGoalMinutes,
-<<<<<<< HEAD
-    totalReadingTime,
-=======
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
     setDailyGoal,
     resetProgress,
     exchangeXPForHeart,
   } = useProgressStore();
 
-<<<<<<< HEAD
-  // Format reading time (seconds -> "Xh Ymin" or "Ymin")
-  const formatReadingTime = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) {
-      return `${minutes}min`;
-    }
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
-    return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}min` : `${hours}h`;
-  };
-
-=======
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
   const canExchangeHeart = totalXP >= 100 && hearts < maxHearts;
 
   const handleExchangeHeart = () => {
@@ -63,19 +45,11 @@ export function ProfileView() {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-2xl mx-auto">
-        {/* Profile header */}
-        <motion.div
-          className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6"
-=======
     <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50">
       <div className="max-w-2xl mx-auto">
         {/* Profile header */}
         <motion.div
           className="bg-white rounded-2xl p-6 shadow-sm mb-6"
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
@@ -84,35 +58,12 @@ export function ProfileView() {
               📚
             </div>
             <div>
-<<<<<<< HEAD
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Reader</h1>
-              <p className="text-gray-500 dark:text-gray-400">Level {Math.floor(totalXP / 100) + 1}</p>
-=======
               <h1 className="text-2xl font-bold text-gray-900">Reader</h1>
               <p className="text-gray-500">Level {Math.floor(totalXP / 100) + 1}</p>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
             </div>
           </div>
 
           {/* Stats grid */}
-<<<<<<< HEAD
-          <div className="grid grid-cols-2 gap-4">
-            <div className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <p className="text-2xl font-bold text-orange-500">🔥 {streak}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Day Streak</p>
-            </div>
-            <div className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <p className="text-2xl font-bold text-blue-500">💎 {totalXP}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Total XP</p>
-            </div>
-            <div className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <p className="text-2xl font-bold text-green-500">{chaptersCompleted.length}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Chapters</p>
-            </div>
-            <div className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-xl">
-              <p className="text-2xl font-bold text-purple-500">📖 {formatReadingTime(totalReadingTime)}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">Reading Time</p>
-=======
           <div className="grid grid-cols-3 gap-4">
             <div className="text-center p-3 bg-gray-50 rounded-xl">
               <p className="text-2xl font-bold text-orange-500">🔥 {streak}</p>
@@ -125,42 +76,26 @@ export function ProfileView() {
             <div className="text-center p-3 bg-gray-50 rounded-xl">
               <p className="text-2xl font-bold text-green-500">{chaptersCompleted.length}</p>
               <p className="text-sm text-gray-500">Chapters</p>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
             </div>
           </div>
         </motion.div>
 
         {/* Progress stats */}
         <motion.div
-<<<<<<< HEAD
-          className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6"
-=======
           className="bg-white rounded-2xl p-6 shadow-sm mb-6"
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-<<<<<<< HEAD
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">📊 Progress</h2>
-=======
           <h2 className="text-lg font-bold text-gray-900 mb-4">📊 Progress</h2>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
 
           <div className="space-y-4">
             <div>
               <div className="flex justify-between text-sm mb-1">
-<<<<<<< HEAD
-                <span className="text-gray-500 dark:text-gray-400">Words Learned</span>
-                <span className="font-medium dark:text-gray-200">{wordsLearned.length}</span>
-              </div>
-              <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-=======
                 <span className="text-gray-500">Words Learned</span>
                 <span className="font-medium">{wordsLearned.length}</span>
               </div>
               <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                 <div
                   className="h-full bg-[#58CC02]"
                   style={{ width: `${Math.min(100, (wordsLearned.length / 100) * 100)}%` }}
@@ -170,17 +105,10 @@ export function ProfileView() {
 
             <div>
               <div className="flex justify-between text-sm mb-1">
-<<<<<<< HEAD
-                <span className="text-gray-500 dark:text-gray-400">Words Mastered</span>
-                <span className="font-medium dark:text-gray-200">{masteredWords.length}</span>
-              </div>
-              <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
-=======
                 <span className="text-gray-500">Words Mastered</span>
                 <span className="font-medium">{masteredWords.length}</span>
               </div>
               <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                 <div
                   className="h-full bg-[#1CB0F6]"
                   style={{ width: `${Math.min(100, (masteredWords.length / 50) * 100)}%` }}
@@ -190,13 +118,8 @@ export function ProfileView() {
 
             <div>
               <div className="flex justify-between text-sm mb-1">
-<<<<<<< HEAD
-                <span className="text-gray-500 dark:text-gray-400">Hearts</span>
-                <span className="font-medium dark:text-gray-200">{hearts} / {maxHearts}</span>
-=======
                 <span className="text-gray-500">Hearts</span>
                 <span className="font-medium">{hearts} / {maxHearts}</span>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
               </div>
               <div className="flex items-center gap-3">
                 <div className="flex gap-1">
@@ -213,11 +136,7 @@ export function ProfileView() {
                     className={`px-3 py-1 rounded-lg text-sm font-medium ${
                       canExchangeHeart
                         ? 'bg-[#1CB0F6] text-white'
-<<<<<<< HEAD
-                        : 'bg-gray-200 dark:bg-gray-700 text-gray-400'
-=======
                         : 'bg-gray-200 text-gray-400'
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                     }`}
                     whileHover={canExchangeHeart ? { scale: 1.05 } : {}}
                     whileTap={canExchangeHeart ? { scale: 0.95 } : {}}
@@ -235,20 +154,12 @@ export function ProfileView() {
 
         {/* Daily goal */}
         <motion.div
-<<<<<<< HEAD
-          className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6"
-=======
           className="bg-white rounded-2xl p-6 shadow-sm mb-6"
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-<<<<<<< HEAD
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">🎯 Daily Goal</h2>
-=======
           <h2 className="text-lg font-bold text-gray-900 mb-4">🎯 Daily Goal</h2>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
           <div className="flex gap-2">
             {[5, 10, 15, 20].map((minutes) => (
               <button
@@ -257,11 +168,7 @@ export function ProfileView() {
                 className={`flex-1 py-3 rounded-xl font-medium transition-colors ${
                   dailyGoalMinutes === minutes
                     ? 'bg-[#58CC02] text-white'
-<<<<<<< HEAD
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-=======
                     : 'bg-gray-100 text-gray-600'
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                 }`}
               >
                 {minutes} min
@@ -272,20 +179,12 @@ export function ProfileView() {
 
         {/* Achievements */}
         <motion.div
-<<<<<<< HEAD
-          className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6"
-=======
           className="bg-white rounded-2xl p-6 shadow-sm mb-6"
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-<<<<<<< HEAD
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">🏆 Achievements</h2>
-=======
           <h2 className="text-lg font-bold text-gray-900 mb-4">🏆 Achievements</h2>
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
           <div className="grid grid-cols-4 gap-3">
             {ACHIEVEMENTS.map((achievement) => {
               const isUnlocked = achievements.includes(achievement.id);
@@ -293,11 +192,7 @@ export function ProfileView() {
                 <motion.div
                   key={achievement.id}
                   className={`aspect-square rounded-xl flex flex-col items-center justify-center ${
-<<<<<<< HEAD
-                    isUnlocked ? 'bg-yellow-50 dark:bg-yellow-900/30' : 'bg-gray-100 dark:bg-gray-700'
-=======
                     isUnlocked ? 'bg-yellow-50' : 'bg-gray-100'
->>>>>>> 671403471b74c37393795356639ca6ae108de0e1
                   }`}
                   whileHover={{ scale: 1.05 }}
                   title={`${achievement.title}: ${achievement.description}`}
