@@ -12,6 +12,7 @@ export interface UserProgress {
   achievements: string[];
   wordsLearned: string[];
   onboardingCompleted: boolean;
+  totalReadingTime: number; // Total reading time in seconds
 }
 
 // Vocabulary Item

@@ -33,14 +33,38 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
 
   const contentRef = useRef<HTMLDivElement>(null);
   const pressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { setCurrentPosition, addXP } = useProgressStore();
+  const rewardedSegmentsRef = useRef(0);
+  const { setCurrentPosition, addXP, startSession, endSession, session } = useProgressStore();
   const { play } = useSound();
   const { speak, stop, isSpeaking } = useTextToSpeech();
 
-  // Stop speaking when leaving the page
+  // Start session when component mounts, end when unmounts
   useEffect(() => {
-    return () => stop();
-  }, [stop]);
+    startSession(chapter.id, 0);
+    return () => {
+      endSession();
+      stop();
+    };
+  }, [chapter.id, startSession, endSession, stop]);
+
+  // Time-based XP reward: 50 XP every 10 minutes
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (session?.startTime) {
+        const elapsedMs = Date.now() - session.startTime;
+        const segments = Math.floor(elapsedMs / (10 * 60 * 1000)); // 10-minute segments
+
+        if (segments > rewardedSegmentsRef.current) {
+          const newSegments = segments - rewardedSegmentsRef.current;
+          addXP(newSegments * 50);
+          rewardedSegmentsRef.current = segments;
+          play('correct'); // Play sound for XP reward
+        }
+      }
+    }, 60000); // Check every minute
+
+    return () => clearInterval(timer);
+  }, [session, addXP, play]);
 
   const handleReadAloud = () => {
     if (isSpeaking) {
@@ -103,7 +127,6 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
 
   const handleComplete = () => {
     setCurrentPosition(chapter.id + 1, 0);
-    addXP(50);
     play('complete');
     onComplete();
   };
@@ -118,7 +141,6 @@ export function ReadingView({ chapter, onComplete, onQuizComplete, onBack }: Rea
     }
     setShowQuiz(false);
     setCurrentPosition(chapter.id + 1, 0);
-    addXP(50);
     play('complete');
 
     // Call onQuizComplete with score string

@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { useProgressStore } from '../../stores/progressStore';
 
 export function Header() {
-  const { streak, totalXP, hearts, maxHearts } = useProgressStore();
+  const { streak, totalXP, hearts, maxHearts, darkMode, toggleDarkMode } = useProgressStore();
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
+    <header className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 z-50 transition-colors">
       <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
         {/* Streak */}
         <motion.div
@@ -38,6 +38,16 @@ export function Header() {
             ))}
           </div>
         </motion.div>
+
+        {/* Dark Mode Toggle */}
+        <motion.button
+          onClick={toggleDarkMode}
+          className="text-2xl"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          {darkMode ? '☀️' : '🌙'}
+        </motion.button>
       </div>
     </header>
   );

@@ -22,6 +22,7 @@ export function ProfileView() {
     achievements,
     wordsLearned,
     dailyGoalMinutes,
+    totalReadingTime,
     setDailyGoal,
     resetProgress,
     exchangeXPForHeart,
@@ -38,6 +39,16 @@ export function ProfileView() {
   const { getMasteredWords } = useVocabularyStore();
   const masteredWords = getMasteredWords();
 
+  const formatReadingTime = (seconds: number): string => {
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) {
+      return `${minutes}min`;
+    }
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return remainingMinutes > 0 ? `${hours}h ${remainingMinutes}min` : `${hours}h`;
+  };
+
   const handleResetProgress = () => {
     if (window.confirm('Are you sure you want to reset all progress? This cannot be undone.')) {
       resetProgress();
@@ -45,11 +56,11 @@ export function ProfileView() {
   };
 
   return (
-    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50">
+    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-2xl mx-auto">
         {/* Profile header */}
         <motion.div
-          className="bg-white rounded-2xl p-6 shadow-sm mb-6"
+          className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
@@ -58,44 +69,48 @@ export function ProfileView() {
               📚
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Reader</h1>
-              <p className="text-gray-500">Level {Math.floor(totalXP / 100) + 1}</p>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Reader</h1>
+              <p className="text-gray-500 dark:text-gray-400">Level {Math.floor(totalXP / 100) + 1}</p>
             </div>
           </div>
 
           {/* Stats grid */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="text-center p-3 bg-gray-50 rounded-xl">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="text-center p-3 bg-gray-50 dark:bg-gray-900 rounded-xl">
               <p className="text-2xl font-bold text-orange-500">🔥 {streak}</p>
-              <p className="text-sm text-gray-500">Day Streak</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Day Streak</p>
             </div>
-            <div className="text-center p-3 bg-gray-50 rounded-xl">
+            <div className="text-center p-3 bg-gray-50 dark:bg-gray-900 rounded-xl">
               <p className="text-2xl font-bold text-blue-500">💎 {totalXP}</p>
-              <p className="text-sm text-gray-500">Total XP</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Total XP</p>
             </div>
-            <div className="text-center p-3 bg-gray-50 rounded-xl">
+            <div className="text-center p-3 bg-gray-50 dark:bg-gray-900 rounded-xl">
               <p className="text-2xl font-bold text-green-500">{chaptersCompleted.length}</p>
-              <p className="text-sm text-gray-500">Chapters</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Chapters</p>
+            </div>
+            <div className="text-center p-3 bg-gray-50 dark:bg-gray-900 rounded-xl">
+              <p className="text-2xl font-bold text-purple-500">📖 {formatReadingTime(totalReadingTime)}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">Reading Time</p>
             </div>
           </div>
         </motion.div>
 
         {/* Progress stats */}
         <motion.div
-          className="bg-white rounded-2xl p-6 shadow-sm mb-6"
+          className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <h2 className="text-lg font-bold text-gray-900 mb-4">📊 Progress</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">📊 Progress</h2>
 
           <div className="space-y-4">
             <div>
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-gray-500">Words Learned</span>
+                <span className="text-gray-500 dark:text-gray-400">Words Learned</span>
                 <span className="font-medium">{wordsLearned.length}</span>
               </div>
-              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-[#58CC02]"
                   style={{ width: `${Math.min(100, (wordsLearned.length / 100) * 100)}%` }}
@@ -105,10 +120,10 @@ export function ProfileView() {
 
             <div>
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-gray-500">Words Mastered</span>
+                <span className="text-gray-500 dark:text-gray-400">Words Mastered</span>
                 <span className="font-medium">{masteredWords.length}</span>
               </div>
-              <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div className="h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-[#1CB0F6]"
                   style={{ width: `${Math.min(100, (masteredWords.length / 50) * 100)}%` }}
@@ -118,7 +133,7 @@ export function ProfileView() {
 
             <div>
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-gray-500">Hearts</span>
+                <span className="text-gray-500 dark:text-gray-400">Hearts</span>
                 <span className="font-medium">{hearts} / {maxHearts}</span>
               </div>
               <div className="flex items-center gap-3">
@@ -154,12 +169,12 @@ export function ProfileView() {
 
         {/* Daily goal */}
         <motion.div
-          className="bg-white rounded-2xl p-6 shadow-sm mb-6"
+          className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <h2 className="text-lg font-bold text-gray-900 mb-4">🎯 Daily Goal</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">🎯 Daily Goal</h2>
           <div className="flex gap-2">
             {[5, 10, 15, 20].map((minutes) => (
               <button
@@ -168,7 +183,7 @@ export function ProfileView() {
                 className={`flex-1 py-3 rounded-xl font-medium transition-colors ${
                   dailyGoalMinutes === minutes
                     ? 'bg-[#58CC02] text-white'
-                    : 'bg-gray-100 text-gray-600'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
                 }`}
               >
                 {minutes} min
@@ -179,12 +194,12 @@ export function ProfileView() {
 
         {/* Achievements */}
         <motion.div
-          className="bg-white rounded-2xl p-6 shadow-sm mb-6"
+          className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h2 className="text-lg font-bold text-gray-900 mb-4">🏆 Achievements</h2>
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">🏆 Achievements</h2>
           <div className="grid grid-cols-4 gap-3">
             {ACHIEVEMENTS.map((achievement) => {
               const isUnlocked = achievements.includes(achievement.id);
@@ -192,7 +207,7 @@ export function ProfileView() {
                 <motion.div
                   key={achievement.id}
                   className={`aspect-square rounded-xl flex flex-col items-center justify-center ${
-                    isUnlocked ? 'bg-yellow-50' : 'bg-gray-100'
+                    isUnlocked ? 'bg-yellow-50' : 'bg-gray-100 dark:bg-gray-700'
                   }`}
                   whileHover={{ scale: 1.05 }}
                   title={`${achievement.title}: ${achievement.description}`}

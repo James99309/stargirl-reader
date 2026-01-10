@@ -38,11 +38,11 @@ export function LeaderboardView() {
     if (rank === 1) return { icon: '1', bg: 'bg-yellow-400', text: 'text-yellow-900' };
     if (rank === 2) return { icon: '2', bg: 'bg-gray-300', text: 'text-gray-700' };
     if (rank === 3) return { icon: '3', bg: 'bg-amber-600', text: 'text-amber-100' };
-    return { icon: String(rank), bg: 'bg-gray-100', text: 'text-gray-600' };
+    return { icon: String(rank), bg: 'bg-gray-100 dark:bg-gray-700', text: 'text-gray-600 dark:text-gray-300' };
   };
 
   return (
-    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50">
+    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div
@@ -50,7 +50,7 @@ export function LeaderboardView() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h1 className="text-2xl font-bold text-gray-900 flex items-center justify-center gap-2">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-2">
             <span className="text-3xl">🏆</span> Leaderboard
           </h1>
         </motion.div>
@@ -78,12 +78,12 @@ export function LeaderboardView() {
         {/* Not ranked yet */}
         {!currentUserRank && !loading && !error && (
           <motion.div
-            className="bg-white rounded-2xl p-5 shadow-sm mb-6 text-center"
+            className="bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-sm mb-6 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <p className="text-gray-500">Keep learning to appear on the leaderboard!</p>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-gray-500 dark:text-gray-400">Keep learning to appear on the leaderboard!</p>
+            <p className="text-sm text-gray-400 dark:text-gray-500 mt-1">
               Current: Lv.{currentUserLevel} · {totalXP} XP
             </p>
           </motion.div>
@@ -97,18 +97,18 @@ export function LeaderboardView() {
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
             />
-            <p className="text-gray-500 mt-4">Loading leaderboard...</p>
+            <p className="text-gray-500 dark:text-gray-400 mt-4">Loading leaderboard...</p>
           </div>
         )}
 
         {/* Error state */}
         {error && !loading && (
           <motion.div
-            className="bg-white rounded-2xl p-6 shadow-sm text-center"
+            className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <p className="text-gray-500 mb-4">Failed to load leaderboard</p>
+            <p className="text-gray-500 dark:text-gray-400 mb-4">Failed to load leaderboard</p>
             <motion.button
               onClick={loadLeaderboard}
               className="px-6 py-2 bg-[#58CC02] text-white rounded-xl font-medium"
@@ -123,17 +123,17 @@ export function LeaderboardView() {
         {/* Leaderboard list */}
         {!loading && !error && (
           <motion.div
-            className="bg-white rounded-2xl shadow-sm overflow-hidden"
+            className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
             {leaderboard.length === 0 ? (
-              <div className="p-6 text-center text-gray-500">
+              <div className="p-6 text-center text-gray-500 dark:text-gray-400">
                 No data available yet
               </div>
             ) : (
-              <div className="divide-y divide-gray-100">
+              <div className="divide-y divide-gray-100 dark:divide-gray-700">
                 {leaderboard.map((entry, index) => {
                   const isCurrentUser = entry.username === username;
                   const rankStyle = getRankIcon(entry.rank);
@@ -158,12 +158,12 @@ export function LeaderboardView() {
                       {/* User info */}
                       <div className="flex-1 min-w-0">
                         <p className={`font-medium truncate ${
-                          isCurrentUser ? 'text-[#58CC02]' : 'text-gray-900'
+                          isCurrentUser ? 'text-[#58CC02]' : 'text-gray-900 dark:text-white'
                         }`}>
                           {entry.username}
                           {isCurrentUser && ' (You)'}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
                           Level {entry.level}
                         </p>
                       </div>

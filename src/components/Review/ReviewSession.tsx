@@ -190,7 +190,7 @@ export function ReviewSession({ onDone }: ReviewSessionProps) {
   // Early returns 放在所有 hooks 之后
   if (wordsForReview.length === 0) {
     return (
-      <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 flex flex-col items-center justify-center">
+      <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -198,8 +198,8 @@ export function ReviewSession({ onDone }: ReviewSessionProps) {
         >
           ✨
         </motion.div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">All caught up!</h2>
-        <p className="text-gray-500 text-center">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">All caught up!</h2>
+        <p className="text-gray-500 dark:text-gray-400 text-center">
           No words to review right now.<br />
           Keep reading to discover new vocabulary!
         </p>
@@ -246,7 +246,7 @@ export function ReviewSession({ onDone }: ReviewSessionProps) {
   // Safety check - if question couldn't be generated, show error
   if (!question) {
     return (
-      <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 flex flex-col items-center justify-center">
+      <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center">
         <p className="text-red-500">Error: Could not generate question</p>
         <p className="text-gray-500">currentIndex: {currentIndex}</p>
         <p className="text-gray-500">wordsForReview.length: {wordsForReview.length}</p>
@@ -308,15 +308,15 @@ export function ReviewSession({ onDone }: ReviewSessionProps) {
   };
 
   return (
-    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50">
+    <div className="pt-20 pb-24 px-4 min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-2xl mx-auto">
         {/* Progress */}
         <div className="mb-6">
-          <div className="flex justify-between text-sm text-gray-500 mb-2">
+          <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400 mb-2">
             <span>Review Progress</span>
             <span>{currentIndex + 1} / {wordsForReview.length}</span>
           </div>
-          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-[#58CC02]"
               initial={{ width: 0 }}
@@ -342,20 +342,20 @@ export function ReviewSession({ onDone }: ReviewSessionProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
           >
-            <div className="bg-white rounded-2xl p-6 shadow-sm mb-6">
-              <p className="text-sm text-gray-500 mb-2">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm mb-6">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
                 {question.type === 'sentence_context' && '在句子中理解单词:'}
                 {question.type === 'meaning' && 'Select the correct answer:'}
                 {question.type === 'chinese_to_word' && '中译英:'}
                 {question.type === 'fill_blank' && '填空题:'}
                 {question.type === 'listening' && '听写题:'}
               </p>
-              <p className="text-xl text-gray-900">{question.question}</p>
+              <p className="text-xl text-gray-900 dark:text-white">{question.question}</p>
 
               {/* 显示原文句子（sentence_context 题型 - 高亮单词） */}
               {question.type === 'sentence_context' && question.sentence && (
-                <div className="mt-4 p-4 bg-gray-50 rounded-xl border-l-4 border-[#1CB0F6]">
-                  <p className="text-gray-700 italic leading-relaxed">
+                <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border-l-4 border-[#1CB0F6]">
+                  <p className="text-gray-700 dark:text-gray-200 italic leading-relaxed">
                     "{question.sentence.split(new RegExp(`(${escapeRegExp(question.word.word)})`, 'gi')).map((part, i) =>
                       part.toLowerCase() === question.word.word.toLowerCase() ? (
                         <span key={i} className="font-bold text-[#1CB0F6] not-italic">{part}</span>
@@ -369,8 +369,8 @@ export function ReviewSession({ onDone }: ReviewSessionProps) {
 
               {/* 填空题句子（不高亮，显示空格） */}
               {question.type === 'fill_blank' && question.sentence && (
-                <div className="mt-4 p-4 bg-gray-50 rounded-xl border-l-4 border-[#FF9600]">
-                  <p className="text-gray-700 leading-relaxed">
+                <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border-l-4 border-[#FF9600]">
+                  <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
                     "{question.sentence}"
                   </p>
                 </div>
@@ -395,7 +395,7 @@ export function ReviewSession({ onDone }: ReviewSessionProps) {
             {question.options && (
               <div className="space-y-3 mb-6">
                 {question.options.map((option, index) => {
-                  let buttonClass = 'bg-white border-2 border-gray-200';
+                  let buttonClass = 'bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700';
 
                   if (selectedIndex === index && !showResult) {
                     buttonClass = 'bg-blue-50 border-2 border-[#1CB0F6]';
@@ -437,9 +437,9 @@ export function ReviewSession({ onDone }: ReviewSessionProps) {
                   className={`w-full p-4 rounded-xl text-lg border-2 outline-none transition-colors ${
                     showResult
                       ? isCorrect
-                        ? 'border-[#58CC02] bg-green-50'
-                        : 'border-[#FF4B4B] bg-red-50'
-                      : 'border-gray-200 focus:border-[#1CB0F6]'
+                        ? 'border-[#58CC02] bg-green-50 dark:bg-green-900/30'
+                        : 'border-[#FF4B4B] bg-red-50 dark:bg-red-900/30'
+                      : 'border-gray-200 dark:border-gray-700 focus:border-[#1CB0F6] bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
                   }`}
                   autoFocus
                 />
@@ -456,7 +456,7 @@ export function ReviewSession({ onDone }: ReviewSessionProps) {
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`p-4 rounded-xl mb-6 ${isCorrect ? 'bg-green-50' : 'bg-red-50'}`}
+                className={`p-4 rounded-xl mb-6 ${isCorrect ? 'bg-green-50 dark:bg-green-900/30' : 'bg-red-50 dark:bg-red-900/30'}`}
               >
                 <p className={`font-bold ${isCorrect ? 'text-[#58CC02]' : 'text-[#FF4B4B]'}`}>
                   {isCorrect ? '✓ Correct! +10 XP' : '✗ Not quite right'}

@@ -37,8 +37,17 @@ function App() {
   const [sessionWords, setSessionWords] = useState(0);
   const [, setLastQuizScore] = useState<string>('');
 
-  const { username, setUsername, checkAndRestoreHearts } = useProgressStore();
+  const { username, setUsername, checkAndRestoreHearts, darkMode } = useProgressStore();
   const chapters = bookData.chapters as Chapter[];
+
+  // Apply dark mode to document root
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
 
   // Check and restore hearts on app load and every minute
   useEffect(() => {
@@ -147,7 +156,7 @@ function App() {
 
       default:
         return (
-          <div className="pt-14 pb-20 px-4 min-h-screen bg-gray-50">
+          <div className="pt-14 pb-20 px-4 min-h-screen bg-gray-50 dark:bg-gray-900">
             <ChapterList
               chapters={chapters}
               onSelectChapter={handleSelectChapter}
@@ -160,7 +169,7 @@ function App() {
   const showNavigation = currentView !== 'complete' && currentView !== 'reading';
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       {showNavigation && <Header />}
 
       <AnimatePresence mode="wait">
