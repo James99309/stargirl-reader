@@ -21,9 +21,10 @@ export function ChapterQuiz({ questions, onComplete, onClose }: ChapterQuizProps
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [showFailScreen, setShowFailScreen] = useState(false);
+  const [showSuccessScreen, setShowSuccessScreen] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
 
-  const { loseHeart, hearts, unlockAchievement } = useProgressStore();
+  const { loseHeart, hearts, unlockAchievement, addXP } = useProgressStore();
   const { play } = useSound();
 
   const question = questions[currentIndex];
@@ -58,7 +59,8 @@ export function ChapterQuiz({ questions, onComplete, onClose }: ChapterQuizProps
         if (score === questions.length) {
           unlockAchievement('perfect_score');
         }
-        onComplete(score, questions.length);
+        addXP(50); // Quiz completion: +50 XP
+        setShowSuccessScreen(true);
       } else {
         setShowFailScreen(true);
         play('wrong');
@@ -78,6 +80,38 @@ export function ChapterQuiz({ questions, onComplete, onClose }: ChapterQuizProps
     setShowFailScreen(false);
     setFinalScore(0);
   };
+
+  // Show success screen
+  if (showSuccessScreen) {
+    return (
+      <motion.div
+        className="fixed inset-0 bg-[#58CC02] z-50 flex flex-col items-center justify-center p-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="text-6xl mb-4"
+        >
+          🎉
+        </motion.div>
+        <h2 className="text-2xl font-bold text-white mb-2">Quiz Complete!</h2>
+        <p className="text-white/80 text-lg mb-2">
+          You got {finalScore} / {questions.length} correct
+        </p>
+        <p className="text-4xl font-bold text-white mb-8">+50 XP</p>
+        <motion.button
+          onClick={() => onComplete(finalScore, questions.length)}
+          className="bg-white text-[#58CC02] font-bold py-4 px-8 rounded-xl text-lg"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Continue
+        </motion.button>
+      </motion.div>
+    );
+  }
 
   // Show fail screen if didn't pass
   if (showFailScreen) {

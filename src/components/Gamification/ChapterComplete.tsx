@@ -20,7 +20,7 @@ export function ChapterComplete({
   useEffect(() => {
     completeChapter(chapterId);
     updateStreak();
-    addXP(50);
+    addXP(100); // Chapter completion: +100 XP
   }, [chapterId, completeChapter, updateStreak, addXP]);
 
   return (
@@ -92,7 +92,7 @@ export function ChapterComplete({
       >
         <div className="flex justify-around text-center">
           <div>
-            <p className="text-4xl font-bold text-white">+{xpEarned + 50}</p>
+            <p className="text-4xl font-bold text-white">+100</p>
             <p className="text-white/70 text-sm">XP Earned</p>
           </div>
           <div className="border-l border-white/30" />
