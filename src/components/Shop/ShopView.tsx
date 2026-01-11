@@ -1,16 +1,14 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useProgressStore } from '../../stores/progressStore';
-import { updateMemberStatus, redeemCode as redeemCodeApi } from '../../services/sheetApi';
+import { updateMemberStatus } from '../../services/sheetApi';
 
 export function ShopView() {
-  const { totalXP, isSuperMember, superMemberExpiry, purchaseSuperMember, username, addXP } = useProgressStore();
+  const { totalXP, isSuperMember, superMemberExpiry, purchaseSuperMember, username } = useProgressStore();
   const [showConfirm, setShowConfirm] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
-  const [redeemCode, setRedeemCode] = useState('');
-  const [redeemMessage, setRedeemMessage] = useState('');
-
+  
   const SUPER_MEMBER_COST = 6499;
   const canAfford = totalXP >= SUPER_MEMBER_COST;
 
@@ -27,23 +25,6 @@ export function ShopView() {
       return;
     }
     setShowConfirm(true);
-  };
-
-  const handleRedeem = async () => {
-    if (!username || !redeemCode.trim()) return;
-
-    setRedeemMessage('Checking...');
-    const result = await redeemCodeApi(username, redeemCode.trim());
-
-    if (result.success && result.xp) {
-      addXP(result.xp);
-      setRedeemMessage(`Success! +${result.xp} XP`);
-      setRedeemCode('');
-      setTimeout(() => setRedeemMessage(''), 3000);
-    } else {
-      setRedeemMessage(result.error || 'Invalid code');
-      setTimeout(() => setRedeemMessage(''), 2000);
-    }
   };
 
   const confirmPurchase = () => {
@@ -167,38 +148,6 @@ export function ShopView() {
               </p>
             )}
           </div>
-        </motion.div>
-
-        {/* Redeem Code Section */}
-        <motion.div
-          className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6 mt-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <h3 className="font-bold text-gray-900 dark:text-white mb-4">🎁 Redeem Code</h3>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={redeemCode}
-              onChange={(e) => setRedeemCode(e.target.value)}
-              placeholder="Enter code"
-              className="flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-[#58CC02] focus:outline-none"
-            />
-            <motion.button
-              onClick={handleRedeem}
-              className="px-6 py-3 bg-[#58CC02] text-white font-bold rounded-xl"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Redeem
-            </motion.button>
-          </div>
-          {redeemMessage && (
-            <p className={`mt-2 text-sm font-medium ${redeemMessage.includes('Success') ? 'text-green-500' : 'text-red-500'}`}>
-              {redeemMessage}
-            </p>
-          )}
         </motion.div>
 
         {/* Confirm Modal */}
