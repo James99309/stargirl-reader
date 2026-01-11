@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useProgressStore } from '../../stores/progressStore';
-import { updateMemberStatus } from '../../services/sheetApi';
+import { updateMemberStatus, redeemCode as redeemCodeApi } from '../../services/sheetApi';
 
 export function ShopView() {
   const { totalXP, isSuperMember, superMemberExpiry, purchaseSuperMember, username, addXP } = useProgressStore();
@@ -29,14 +29,19 @@ export function ShopView() {
     setShowConfirm(true);
   };
 
-  const handleRedeem = () => {
-    if (redeemCode.toUpperCase() === 'JING6') {
-      addXP(10000);
-      setRedeemMessage('Success! +10000 XP');
+  const handleRedeem = async () => {
+    if (!username || !redeemCode.trim()) return;
+
+    setRedeemMessage('Checking...');
+    const result = await redeemCodeApi(username, redeemCode.trim());
+
+    if (result.success && result.xp) {
+      addXP(result.xp);
+      setRedeemMessage(`Success! +${result.xp} XP`);
       setRedeemCode('');
       setTimeout(() => setRedeemMessage(''), 3000);
     } else {
-      setRedeemMessage('Invalid code');
+      setRedeemMessage(result.error || 'Invalid code');
       setTimeout(() => setRedeemMessage(''), 2000);
     }
   };

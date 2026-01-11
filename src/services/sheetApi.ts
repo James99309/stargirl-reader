@@ -1,6 +1,6 @@
 import type { LeaderboardEntry } from '../types';
 
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyLs-DYd98laG6xdhoFRZZCFoKstVJLZFnURshRe65COx28npucyHCQdwipuMkuMGNu4Q/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycby9xZ6PkQwSuY_hqMhTkCL77-sx7Wyl0qq9t1zuGz5ic4GrtwlA7JmFdiyshLeE2HT7OQ/exec';
 
 export async function recordProgress(data: {
   username: string;
@@ -77,6 +77,26 @@ export async function updateUserLocation(username: string, location: string) {
     console.log('Location updated');
   } catch (error) {
     console.error('Failed to update location:', error);
+  }
+}
+
+export async function redeemCode(username: string, code: string): Promise<{ success: boolean; xp?: number; error?: string }> {
+  try {
+    const response = await fetch(SHEET_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        action: 'redeemCode',
+        code,
+      }),
+    });
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to redeem code:', error);
+    return { success: false, error: 'Network error' };
   }
 }
 
