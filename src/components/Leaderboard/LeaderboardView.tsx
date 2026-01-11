@@ -8,6 +8,7 @@ export function LeaderboardView() {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [location, setLocation] = useState<string>('');
 
   const { username, totalXP, isSuperMember } = useProgressStore();
   const currentUserLevel = Math.floor(totalXP / 100) + 1;
@@ -27,6 +28,26 @@ export function LeaderboardView() {
 
   useEffect(() => {
     loadLeaderboard();
+    // Request location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          try {
+            const { latitude, longitude } = position.coords;
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
+            );
+            const data = await response.json();
+            const city = data.address?.city || data.address?.town || data.address?.village || '';
+            const country = data.address?.country || '';
+            setLocation(city ? `${city}, ${country}` : country);
+          } catch {
+            setLocation('');
+          }
+        },
+        () => setLocation('')
+      );
+    }
   }, []);
 
   // Find current user's rank
@@ -50,6 +71,11 @@ export function LeaderboardView() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
+          {location && (
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+              📍 {location}
+            </p>
+          )}
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center justify-center gap-2">
             <span className="text-3xl">🏆</span> Leaderboard
           </h1>
