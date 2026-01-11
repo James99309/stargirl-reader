@@ -60,6 +60,26 @@ export async function fetchLeaderboard(): Promise<LeaderboardEntry[]> {
   }
 }
 
+export async function updateUserLocation(username: string, location: string) {
+  try {
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        action: 'updateLocation',
+        location,
+      }),
+    });
+    console.log('Location updated');
+  } catch (error) {
+    console.error('Failed to update location:', error);
+  }
+}
+
 export async function fetchUserByUsername(username: string): Promise<LeaderboardEntry | null> {
   try {
     const leaderboard = await fetchLeaderboard();

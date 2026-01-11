@@ -96,6 +96,7 @@ export interface LeaderboardEntry {
   level: number;
   rank: number;
   isSuperMember?: boolean;
+  location?: string;
 }
 
 // Review Quiz

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useProgressStore } from '../../stores/progressStore';
-import { fetchLeaderboard } from '../../services/sheetApi';
+import { fetchLeaderboard, updateUserLocation } from '../../services/sheetApi';
 import type { LeaderboardEntry } from '../../types';
 
 export function LeaderboardView() {
@@ -40,7 +40,12 @@ export function LeaderboardView() {
             const data = await response.json();
             const city = data.address?.city || data.address?.town || data.address?.village || '';
             const country = data.address?.country || '';
-            setLocation(city ? `${city}, ${country}` : country);
+            const loc = city ? `${city}, ${country}` : country;
+            setLocation(loc);
+            // Save location to server
+            if (username && loc) {
+              updateUserLocation(username, loc);
+            }
           } catch {
             setLocation('');
           }
@@ -205,6 +210,9 @@ export function LeaderboardView() {
                         </div>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
                           Level {entry.level}
+                          {entry.location && (
+                            <span className="ml-2">📍 {entry.location}</span>
+                          )}
                         </p>
                       </div>
 
