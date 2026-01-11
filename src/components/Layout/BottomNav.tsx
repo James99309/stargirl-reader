@@ -1,14 +1,15 @@
 import { motion } from 'framer-motion';
 
 interface BottomNavProps {
-  activeTab: 'read' | 'review' | 'words' | 'leaderboard' | 'profile';
-  onTabChange: (tab: 'read' | 'review' | 'words' | 'leaderboard' | 'profile') => void;
+  activeTab: 'read' | 'review' | 'words' | 'shop' | 'leaderboard' | 'profile';
+  onTabChange: (tab: 'read' | 'review' | 'words' | 'shop' | 'leaderboard' | 'profile') => void;
 }
 
 const tabs = [
   { id: 'read' as const, icon: '📖', label: 'Read' },
   { id: 'review' as const, icon: '🔄', label: 'Review' },
   { id: 'words' as const, icon: '📚', label: 'Words' },
+  { id: 'shop' as const, icon: '🛒', label: 'Shop' },
   { id: 'leaderboard' as const, icon: '🏆', label: 'Rank' },
   { id: 'profile' as const, icon: '👤', label: 'Profile' },
 ];
