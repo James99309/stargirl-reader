@@ -4,14 +4,12 @@ import { useProgressStore } from '../../stores/progressStore';
 
 interface ChapterCompleteProps {
   chapterId: number;
-  xpEarned: number;
   wordsLearned: number;
   onContinue: () => void;
 }
 
 export function ChapterComplete({
   chapterId,
-  xpEarned,
   wordsLearned,
   onContinue,
 }: ChapterCompleteProps) {

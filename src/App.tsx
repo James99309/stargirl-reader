@@ -38,7 +38,6 @@ function App() {
   const [activeTab, setActiveTab] = useState<Tab>('read');
   const [currentView, setCurrentView] = useState<View>('home');
   const [selectedChapter, setSelectedChapter] = useState<Chapter | null>(null);
-  const [sessionXP, setSessionXP] = useState(0);
   const [sessionWords, setSessionWords] = useState(0);
   const [, setLastQuizScore] = useState<string>('');
   const [selectedReviewQuiz, setSelectedReviewQuiz] = useState<ReviewQuiz | null>(null);
@@ -100,7 +99,6 @@ function App() {
   const handleSelectChapter = (chapter: Chapter) => {
     setSelectedChapter(chapter);
     setCurrentView('reading');
-    setSessionXP(0);
     setSessionWords(0);
     setLastQuizScore('');
   };
@@ -195,7 +193,6 @@ function App() {
         return selectedChapter ? (
           <ChapterComplete
             chapterId={selectedChapter.id}
-            xpEarned={sessionXP}
             wordsLearned={sessionWords}
             onContinue={handleContinueAfterComplete}
           />
