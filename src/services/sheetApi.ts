@@ -1,6 +1,6 @@
 import type { LeaderboardEntry } from '../types';
 
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzKCdYc2FO7bytUscm9qdEE06CvMrC0QfHKZPYvi-x8JAKP2c22-uyICY0ulcDVQZUCZg/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyGkTtPzqfgbf5E1xGcmygYM_Fe1K4btoZUmgWLgwiVhFTD56PbvlwoABpbEqTyKWNn/exec';
 
 export async function recordProgress(data: {
   username: string;
