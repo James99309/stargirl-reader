@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useProgressStore } from '../../stores/progressStore';
-import { updateMemberStatus } from '../../services/sheetApi';
+import { updateMemberStatus, redeemCode as redeemCodeApi } from '../../services/sheetApi';
 
 export function ShopView() {
   const { totalXP, isSuperMember, superMemberExpiry, purchaseSuperMember, username, addXP } = useProgressStore();
@@ -10,16 +10,6 @@ export function ShopView() {
   const [showError, setShowError] = useState(false);
   const [redeemCode, setRedeemCode] = useState('');
   const [redeemMessage, setRedeemMessage] = useState('');
-  const [usedCodes, setUsedCodes] = useState<string[]>(() => {
-    const saved = localStorage.getItem('usedCodes');
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  // Redeem codes - add more here
-  const CODES: Record<string, number> = {
-    'JING6': 10000,
-    // 'CODE2': 500,
-  };
   
   const SUPER_MEMBER_COST = 6499;
   const canAfford = totalXP >= SUPER_MEMBER_COST;
@@ -39,27 +29,19 @@ export function ShopView() {
     setShowConfirm(true);
   };
 
-  const handleRedeem = () => {
-    const code = redeemCode.trim().toUpperCase();
-    if (!code) return;
+  const handleRedeem = async () => {
+    if (!username || !redeemCode.trim()) return;
 
-    if (usedCodes.includes(code)) {
-      setRedeemMessage('You already used this code');
-      setTimeout(() => setRedeemMessage(''), 2000);
-      return;
-    }
+    setRedeemMessage('Checking...');
+    const result = await redeemCodeApi(username, redeemCode.trim());
 
-    const xp = CODES[code];
-    if (xp) {
-      addXP(xp);
-      const newUsedCodes = [...usedCodes, code];
-      setUsedCodes(newUsedCodes);
-      localStorage.setItem('usedCodes', JSON.stringify(newUsedCodes));
-      setRedeemMessage(`Success! +${xp} XP`);
+    if (result.success && result.xp) {
+      addXP(result.xp);
+      setRedeemMessage(`Success! +${result.xp} XP`);
       setRedeemCode('');
       setTimeout(() => setRedeemMessage(''), 3000);
     } else {
-      setRedeemMessage('Invalid code');
+      setRedeemMessage(result.error || 'Invalid code');
       setTimeout(() => setRedeemMessage(''), 2000);
     }
   };
