@@ -158,9 +158,9 @@ export function LeaderboardView() {
                       {/* User info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-1">
-                          {isCurrentUser && isSuperMember && <span className="text-sm">👑</span>}
+                          {(isCurrentUser ? isSuperMember : entry.isSuperMember) && <span className="text-sm">👑</span>}
                           <p className={`font-medium truncate ${
-                            isCurrentUser && isSuperMember
+                            (isCurrentUser ? isSuperMember : entry.isSuperMember)
                               ? 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500'
                               : isCurrentUser
                               ? 'text-[#58CC02]'
@@ -168,7 +168,7 @@ export function LeaderboardView() {
                           }`}>
                             {entry.username}
                           </p>
-                          {isCurrentUser && isSuperMember && (
+                          {(isCurrentUser ? isSuperMember : entry.isSuperMember) && (
                             <span className="text-xs text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500 font-bold">
                               (Super VIP)
                             </span>

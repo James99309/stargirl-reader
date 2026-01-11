@@ -7,6 +7,7 @@ export async function recordProgress(data: {
   chapter: string;
   score: string;
   xp: number;
+  isSuperMember?: boolean;
 }) {
   try {
     await fetch(SHEET_URL, {
@@ -20,6 +21,26 @@ export async function recordProgress(data: {
     console.log('Progress recorded to Google Sheets');
   } catch (error) {
     console.error('Failed to record progress:', error);
+  }
+}
+
+export async function updateMemberStatus(username: string, isSuperMember: boolean) {
+  try {
+    await fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username,
+        action: 'updateMemberStatus',
+        isSuperMember,
+      }),
+    });
+    console.log('Member status updated');
+  } catch (error) {
+    console.error('Failed to update member status:', error);
   }
 }
 

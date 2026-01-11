@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useProgressStore } from '../../stores/progressStore';
+import { updateMemberStatus } from '../../services/sheetApi';
 
 export function ShopView() {
-  const { totalXP, isSuperMember, superMemberExpiry, purchaseSuperMember } = useProgressStore();
+  const { totalXP, isSuperMember, superMemberExpiry, purchaseSuperMember, username } = useProgressStore();
   const [showConfirm, setShowConfirm] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -30,6 +31,10 @@ export function ShopView() {
     const success = purchaseSuperMember();
     setShowConfirm(false);
     if (success) {
+      // Sync member status to server
+      if (username) {
+        updateMemberStatus(username, true);
+      }
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
     } else {

@@ -95,6 +95,7 @@ export interface LeaderboardEntry {
   totalXP: number;
   level: number;
   rank: number;
+  isSuperMember?: boolean;
 }
 
 // Review Quiz
