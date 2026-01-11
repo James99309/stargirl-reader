@@ -8,7 +8,7 @@ export function ShopView() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
 
-  const SUPER_MEMBER_COST = 0; // FREE for testing
+  const SUPER_MEMBER_COST = 6499;
   const canAfford = totalXP >= SUPER_MEMBER_COST;
 
   const getRemainingDays = () => {

@@ -56,7 +56,7 @@ const initialState: UserProgress = {
 // Heart regeneration: 30 minutes per heart
 const HEART_REGEN_INTERVAL = 30 * 60 * 1000; // 30 minutes in ms
 const XP_PER_HEART = 100;
-const SUPER_MEMBER_COST = 0; // XP cost for super membership (FREE for testing)
+const SUPER_MEMBER_COST = 6499; // XP cost for super membership
 const SUPER_MEMBER_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
 
 export const useProgressStore = create<ProgressState>()(
