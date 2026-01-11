@@ -10,6 +10,7 @@ interface ProgressState extends UserProgress {
   isSuperMember: boolean;
   superMemberExpiry: number | null; // timestamp when super membership expires
   reviewQuizzesCompleted: string[]; // completed review quiz IDs
+  lastLoginBonusDate: string | null; // date when last login bonus was claimed
 
   // Actions
   startSession: (chapterId: number, sectionId: number) => void;
@@ -33,6 +34,7 @@ interface ProgressState extends UserProgress {
   purchaseSuperMember: () => boolean; // Purchase super membership for 10000 XP
   checkSuperMemberStatus: () => void; // Check if super membership has expired
   completeReviewQuiz: (quizId: string) => void; // Complete a review quiz
+  claimLoginBonus: () => number; // Claim daily login bonus for super members, returns XP earned
 }
 
 const initialState: UserProgress = {
@@ -68,6 +70,7 @@ export const useProgressStore = create<ProgressState>()(
       isSuperMember: false,
       superMemberExpiry: null,
       reviewQuizzesCompleted: [],
+      lastLoginBonusDate: null,
 
       startSession: (chapterId, sectionId) => {
         set({
@@ -240,7 +243,7 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       resetProgress: () => {
-        set({ ...initialState, session: null, username: null, lastHeartLoss: null, darkMode: false, isSuperMember: false, superMemberExpiry: null, reviewQuizzesCompleted: [] });
+        set({ ...initialState, session: null, username: null, lastHeartLoss: null, darkMode: false, isSuperMember: false, superMemberExpiry: null, reviewQuizzesCompleted: [], lastLoginBonusDate: null });
       },
 
       setUsername: (name) => {
@@ -248,7 +251,7 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       logout: () => {
-        set({ ...initialState, session: null, username: null, lastHeartLoss: null, isSuperMember: false, superMemberExpiry: null, reviewQuizzesCompleted: [] });
+        set({ ...initialState, session: null, username: null, lastHeartLoss: null, isSuperMember: false, superMemberExpiry: null, reviewQuizzesCompleted: [], lastLoginBonusDate: null });
       },
 
       toggleDarkMode: () => {
@@ -297,6 +300,18 @@ export const useProgressStore = create<ProgressState>()(
           });
           addXP(100); // Bonus XP for completing review quiz
         }
+      },
+
+      claimLoginBonus: () => {
+        const { isSuperMember, lastLoginBonusDate, addXP } = get();
+        if (!isSuperMember) return 0;
+
+        const today = new Date().toDateString();
+        if (lastLoginBonusDate === today) return 0; // Already claimed today
+
+        set({ lastLoginBonusDate: today });
+        addXP(50); // Super VIP daily login bonus
+        return 50;
       },
     }),
     {

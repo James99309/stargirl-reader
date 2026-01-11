@@ -11,6 +11,7 @@ import { WordBank } from './components/Words/WordBank';
 import { ProfileView } from './components/Profile/ProfileView';
 import { LeaderboardView } from './components/Leaderboard/LeaderboardView';
 import { LoginScreen } from './components/Auth/LoginScreen';
+import { ShopView } from './components/Shop/ShopView';
 import { useProgressStore } from './stores/progressStore';
 import { recordProgress } from './services/sheetApi';
 import bookData from './data/stargirl.json';
@@ -42,7 +43,9 @@ function App() {
   const [selectedReviewQuiz, setSelectedReviewQuiz] = useState<ReviewQuiz | null>(null);
   const [showReviewQuiz, setShowReviewQuiz] = useState(false);
 
-  const { username, setUsername, checkAndRestoreHearts, darkMode } = useProgressStore();
+  const { username, setUsername, checkAndRestoreHearts, darkMode, claimLoginBonus, checkSuperMemberStatus } = useProgressStore();
+  const [showLoginBonus, setShowLoginBonus] = useState(false);
+  const [loginBonusXP, setLoginBonusXP] = useState(0);
   const chapters = bookData.chapters as Chapter[];
 
   // Apply dark mode to document root
@@ -60,6 +63,19 @@ function App() {
     const interval = setInterval(checkAndRestoreHearts, 60000); // Check every minute
     return () => clearInterval(interval);
   }, [checkAndRestoreHearts]);
+
+  // Check super member status and claim daily login bonus
+  useEffect(() => {
+    if (username) {
+      checkSuperMemberStatus();
+      const bonus = claimLoginBonus();
+      if (bonus > 0) {
+        setLoginBonusXP(bonus);
+        setShowLoginBonus(true);
+        setTimeout(() => setShowLoginBonus(false), 3000);
+      }
+    }
+  }, [username, checkSuperMemberStatus, claimLoginBonus]);
 
   const handleLogin = (name: string) => {
     setUsername(name);
@@ -146,6 +162,10 @@ function App() {
       return <LeaderboardView />;
     }
 
+    if (activeTab === 'shop') {
+      return <ShopView />;
+    }
+
     if (activeTab === 'profile') {
       return <ProfileView />;
     }
@@ -210,6 +230,18 @@ function App() {
             onComplete={handleReviewQuizComplete}
             onClose={() => setShowReviewQuiz(false)}
           />
+        )}
+      </AnimatePresence>
+
+      {/* Super VIP Daily Login Bonus Toast */}
+      <AnimatePresence>
+        {showLoginBonus && (
+          <div className="fixed top-20 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-6 py-3 rounded-full shadow-lg z-50 animate-bounce">
+            <div className="flex items-center gap-2">
+              <span>👑</span>
+              <span className="font-bold">Super VIP Daily Bonus: +{loginBonusXP} XP!</span>
+            </div>
+          </div>
         )}
       </AnimatePresence>
     </div>

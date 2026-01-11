@@ -9,7 +9,7 @@ export function LeaderboardView() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const { username, totalXP } = useProgressStore();
+  const { username, totalXP, isSuperMember } = useProgressStore();
   const currentUserLevel = Math.floor(totalXP / 100) + 1;
 
   const loadLeaderboard = async () => {
@@ -157,12 +157,26 @@ export function LeaderboardView() {
 
                       {/* User info */}
                       <div className="flex-1 min-w-0">
-                        <p className={`font-medium truncate ${
-                          isCurrentUser ? 'text-[#58CC02]' : 'text-gray-900 dark:text-white'
-                        }`}>
-                          {entry.username}
-                          {isCurrentUser && ' (You)'}
-                        </p>
+                        <div className="flex items-center gap-1">
+                          {isCurrentUser && isSuperMember && <span className="text-sm">👑</span>}
+                          <p className={`font-medium truncate ${
+                            isCurrentUser && isSuperMember
+                              ? 'text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500'
+                              : isCurrentUser
+                              ? 'text-[#58CC02]'
+                              : 'text-gray-900 dark:text-white'
+                          }`}>
+                            {entry.username}
+                          </p>
+                          {isCurrentUser && isSuperMember && (
+                            <span className="text-xs text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500 font-bold">
+                              (Super VIP)
+                            </span>
+                          )}
+                          {isCurrentUser && !isSuperMember && (
+                            <span className="text-xs text-gray-500">(You)</span>
+                          )}
+                        </div>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
                           Level {entry.level}
                         </p>
