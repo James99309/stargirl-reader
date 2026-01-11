@@ -6,6 +6,7 @@ import { ChapterList } from './components/Home/ChapterList';
 import { ReadingView } from './components/Reading/ReadingView';
 import { ChapterComplete } from './components/Gamification/ChapterComplete';
 import { ReviewSession } from './components/Review/ReviewSession';
+import { ReviewQuizView } from './components/Review/ReviewQuizView';
 import { WordBank } from './components/Words/WordBank';
 import { ProfileView } from './components/Profile/ProfileView';
 import { LeaderboardView } from './components/Leaderboard/LeaderboardView';
@@ -13,6 +14,8 @@ import { LoginScreen } from './components/Auth/LoginScreen';
 import { useProgressStore } from './stores/progressStore';
 import { recordProgress } from './services/sheetApi';
 import bookData from './data/stargirl.json';
+import reviewQuizzesData from './data/reviewQuizzes.json';
+import type { ReviewQuiz } from './types';
 import './index.css';
 
 interface Chapter {
@@ -26,7 +29,7 @@ interface Chapter {
   }[];
 }
 
-type Tab = 'read' | 'review' | 'words' | 'leaderboard' | 'profile';
+type Tab = 'read' | 'review' | 'words' | 'shop' | 'leaderboard' | 'profile';
 type View = 'home' | 'reading' | 'complete';
 
 function App() {
@@ -36,6 +39,8 @@ function App() {
   const [sessionXP, setSessionXP] = useState(0);
   const [sessionWords, setSessionWords] = useState(0);
   const [, setLastQuizScore] = useState<string>('');
+  const [selectedReviewQuiz, setSelectedReviewQuiz] = useState<ReviewQuiz | null>(null);
+  const [showReviewQuiz, setShowReviewQuiz] = useState(false);
 
   const { username, setUsername, checkAndRestoreHearts, darkMode } = useProgressStore();
   const chapters = bookData.chapters as Chapter[];
@@ -110,6 +115,19 @@ function App() {
     }
   };
 
+  const handleSelectReviewQuiz = (quizId: string) => {
+    const quiz = reviewQuizzesData.reviewQuizzes.find(q => q.id === quizId);
+    if (quiz) {
+      setSelectedReviewQuiz(quiz as ReviewQuiz);
+      setShowReviewQuiz(true);
+    }
+  };
+
+  const handleReviewQuizComplete = () => {
+    setShowReviewQuiz(false);
+    setSelectedReviewQuiz(null);
+  };
+
   // Show login screen if not logged in
   if (!username) {
     return <LoginScreen onLogin={handleLogin} />;
@@ -160,6 +178,7 @@ function App() {
             <ChapterList
               chapters={chapters}
               onSelectChapter={handleSelectChapter}
+              onSelectReviewQuiz={handleSelectReviewQuiz}
             />
           </div>
         );
@@ -179,6 +198,20 @@ function App() {
       {showNavigation && (
         <BottomNav activeTab={activeTab} onTabChange={handleTabChange} />
       )}
+
+      {/* Review Quiz Modal */}
+      <AnimatePresence>
+        {showReviewQuiz && selectedReviewQuiz && (
+          <ReviewQuizView
+            quizId={selectedReviewQuiz.id}
+            title={selectedReviewQuiz.title}
+            subtitle={selectedReviewQuiz.subtitle}
+            questions={selectedReviewQuiz.questions}
+            onComplete={handleReviewQuizComplete}
+            onClose={() => setShowReviewQuiz(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

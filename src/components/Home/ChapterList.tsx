@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { useProgressStore } from '../../stores/progressStore';
+import { ReviewQuizButton } from './ReviewQuizButton';
+import reviewQuizzesData from '../../data/reviewQuizzes.json';
 
 interface Chapter {
   id: number;
@@ -15,10 +17,16 @@ interface Chapter {
 interface ChapterListProps {
   chapters: Chapter[];
   onSelectChapter: (chapter: Chapter) => void;
+  onSelectReviewQuiz: (quizId: string) => void;
 }
 
-export function ChapterList({ chapters, onSelectChapter }: ChapterListProps) {
+export function ChapterList({ chapters, onSelectChapter, onSelectReviewQuiz }: ChapterListProps) {
   const { chaptersCompleted, currentChapter } = useProgressStore();
+
+  // Find review quiz for a given chapter
+  const getReviewQuizForChapter = (chapterId: number) => {
+    return reviewQuizzesData.reviewQuizzes.find(quiz => quiz.afterChapter === chapterId);
+  };
 
   const getChapterStatus = (chapterId: number) => {
     if (chaptersCompleted.includes(chapterId)) return 'completed';
@@ -97,6 +105,21 @@ export function ChapterList({ chapters, onSelectChapter }: ChapterListProps) {
                   </>
                 )}
               </motion.button>
+
+              {/* Review Quiz Button */}
+              {(() => {
+                const reviewQuiz = getReviewQuizForChapter(chapter.id);
+                if (!reviewQuiz) return null;
+                return (
+                  <ReviewQuizButton
+                    quizId={reviewQuiz.id}
+                    subtitle={reviewQuiz.subtitle}
+                    unlockCondition={reviewQuiz.unlockCondition}
+                    position={index % 2 === 0 ? 'right' : 'left'}
+                    onClick={() => onSelectReviewQuiz(reviewQuiz.id)}
+                  />
+                );
+              })()}
 
               {/* Status label */}
               <p

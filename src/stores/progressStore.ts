@@ -7,6 +7,9 @@ interface ProgressState extends UserProgress {
   username: string | null;
   lastHeartLoss: number | null; // timestamp when hearts were last lost
   darkMode: boolean;
+  isSuperMember: boolean;
+  superMemberExpiry: number | null; // timestamp when super membership expires
+  reviewQuizzesCompleted: string[]; // completed review quiz IDs
 
   // Actions
   startSession: (chapterId: number, sectionId: number) => void;
@@ -27,6 +30,9 @@ interface ProgressState extends UserProgress {
   setUsername: (name: string) => void;
   logout: () => void;
   toggleDarkMode: () => void;
+  purchaseSuperMember: () => boolean; // Purchase super membership for 10000 XP
+  checkSuperMemberStatus: () => void; // Check if super membership has expired
+  completeReviewQuiz: (quizId: string) => void; // Complete a review quiz
 }
 
 const initialState: UserProgress = {
@@ -48,6 +54,8 @@ const initialState: UserProgress = {
 // Heart regeneration: 30 minutes per heart
 const HEART_REGEN_INTERVAL = 30 * 60 * 1000; // 30 minutes in ms
 const XP_PER_HEART = 100;
+const SUPER_MEMBER_COST = 10000; // XP cost for super membership
+const SUPER_MEMBER_DURATION = 30 * 24 * 60 * 60 * 1000; // 30 days in ms
 
 export const useProgressStore = create<ProgressState>()(
   persist(
@@ -57,6 +65,9 @@ export const useProgressStore = create<ProgressState>()(
       username: null,
       lastHeartLoss: null,
       darkMode: false,
+      isSuperMember: false,
+      superMemberExpiry: null,
+      reviewQuizzesCompleted: [],
 
       startSession: (chapterId, sectionId) => {
         set({
@@ -91,6 +102,10 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       loseHeart: () => {
+        const { isSuperMember } = get();
+        // Super members don't lose hearts
+        if (isSuperMember) return;
+
         set((state) => ({
           hearts: Math.max(0, state.hearts - 1),
           lastHeartLoss: state.hearts > 0 ? Date.now() : state.lastHeartLoss,
@@ -225,7 +240,7 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       resetProgress: () => {
-        set({ ...initialState, session: null, username: null, lastHeartLoss: null, darkMode: false });
+        set({ ...initialState, session: null, username: null, lastHeartLoss: null, darkMode: false, isSuperMember: false, superMemberExpiry: null, reviewQuizzesCompleted: [] });
       },
 
       setUsername: (name) => {
@@ -233,11 +248,55 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       logout: () => {
-        set({ ...initialState, session: null, username: null, lastHeartLoss: null });
+        set({ ...initialState, session: null, username: null, lastHeartLoss: null, isSuperMember: false, superMemberExpiry: null, reviewQuizzesCompleted: [] });
       },
 
       toggleDarkMode: () => {
         set((state) => ({ darkMode: !state.darkMode }));
+      },
+
+      purchaseSuperMember: () => {
+        const { totalXP, isSuperMember, superMemberExpiry } = get();
+        if (totalXP < SUPER_MEMBER_COST) {
+          return false;
+        }
+
+        const now = Date.now();
+        // If already a super member, extend the expiry
+        const newExpiry = isSuperMember && superMemberExpiry
+          ? superMemberExpiry + SUPER_MEMBER_DURATION
+          : now + SUPER_MEMBER_DURATION;
+
+        set({
+          totalXP: totalXP - SUPER_MEMBER_COST,
+          isSuperMember: true,
+          superMemberExpiry: newExpiry,
+          hearts: 5, // Restore hearts to full
+          maxHearts: 5,
+        });
+        return true;
+      },
+
+      checkSuperMemberStatus: () => {
+        const { isSuperMember, superMemberExpiry } = get();
+        if (!isSuperMember || !superMemberExpiry) return;
+
+        if (Date.now() > superMemberExpiry) {
+          set({
+            isSuperMember: false,
+            superMemberExpiry: null,
+          });
+        }
+      },
+
+      completeReviewQuiz: (quizId) => {
+        const { reviewQuizzesCompleted, addXP } = get();
+        if (!reviewQuizzesCompleted.includes(quizId)) {
+          set({
+            reviewQuizzesCompleted: [...reviewQuizzesCompleted, quizId],
+          });
+          addXP(100); // Bonus XP for completing review quiz
+        }
       },
     }),
     {

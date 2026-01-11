@@ -96,3 +96,19 @@ export interface LeaderboardEntry {
   level: number;
   rank: number;
 }
+
+// Review Quiz
+export interface ReviewQuizQuestion {
+  question: string;
+  options: string[];
+  correctIndex: number;
+}
+
+export interface ReviewQuiz {
+  id: string;
+  title: string;
+  subtitle: string;
+  afterChapter: number;
+  unlockCondition: number;
+  questions: ReviewQuizQuestion[];
+}

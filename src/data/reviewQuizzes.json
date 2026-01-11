@@ -1,0 +1,783 @@
+{
+  "reviewQuizzes": [
+    {
+      "id": "review-1",
+      "title": "Review Quiz 1",
+      "subtitle": "Ch 1-3",
+      "afterChapter": 3,
+      "unlockCondition": 3,
+      "questions": [
+        {
+          "question": "Why did the narrator think of his Uncle Pete's porcupine necktie when he first saw Stargirl?",
+          "options": [
+            "Because Stargirl was wearing a similar tie",
+            "Because both were unique and special things he couldn't quite understand",
+            "Because his uncle had told him about Stargirl before",
+            "Because the necktie had a star pattern on it"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does the butterfly metaphor suggest about the students' attempt to understand Stargirl?",
+          "options": [
+            "She was as beautiful as a butterfly",
+            "She liked collecting butterflies",
+            "They couldn't pin her down or define her - she was too free",
+            "She was fragile and needed protection"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "question": "How did Stargirl's homeschooling background affect her behavior at MAHS?",
+          "options": [
+            "She was shy and avoided other students",
+            "She didn't know the unwritten rules about fitting in",
+            "She was more academically advanced than others",
+            "She refused to participate in school activities"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What was Kevin's initial reaction to Stargirl compared to Leo's?",
+          "options": [
+            "Kevin was more curious while Leo was indifferent",
+            "Both had the exact same reaction",
+            "Kevin suggested she might just be herself, while Leo was more puzzled",
+            "Kevin was afraid of her while Leo was attracted"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "question": "What theme is established in the first three chapters about conformity?",
+          "options": [
+            "Everyone should follow the same rules",
+            "Being different makes you an outcast",
+            "The tension between individuality and fitting in",
+            "Schools should enforce stricter dress codes"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "question": "Why did other students 'part before her like the Red Sea' when Stargirl walked through the halls?",
+          "options": [
+            "They respected her deeply",
+            "She had a powerful presence that demanded attention",
+            "They were afraid to touch her or catch what made her different",
+            "She was walking too fast"
+          ],
+          "correctIndex": 2
+        }
+      ]
+    },
+    {
+      "id": "review-2",
+      "title": "Review Quiz 2",
+      "subtitle": "Ch 1-6",
+      "afterChapter": 6,
+      "unlockCondition": 6,
+      "questions": [
+        {
+          "question": "How did the school's attitude toward Stargirl change over the first six chapters?",
+          "options": [
+            "From acceptance to rejection",
+            "From fear and confusion to growing curiosity",
+            "They ignored her completely throughout",
+            "They immediately loved her"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What role does Hot Seat play in the story so far?",
+          "options": [
+            "It's just a background detail",
+            "It connects Leo and Kevin and creates a platform for school attention",
+            "It's Stargirl's favorite show",
+            "It's used to interview teachers only"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What makes Stargirl's kindness unusual compared to typical high school behavior?",
+          "options": [
+            "She only helps popular students",
+            "She expects things in return",
+            "She shows kindness to strangers and even rivals without expecting anything",
+            "She keeps her kindness private"
+          ],
+          "correctIndex": 2
+        },
+        {
+          "question": "Why is Stargirl's pet rat significant to her character?",
+          "options": [
+            "Rats are common pets at MAHS",
+            "It shows she embraces things others might reject or fear",
+            "Her parents gave it to her",
+            "It's a requirement for homeschooled students"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Stargirl's singing 'Happy Birthday' to people reveal about her?",
+          "options": [
+            "She wants to become a professional singer",
+            "She pays attention to others and celebrates them openly",
+            "She only does it to get attention",
+            "It's a tradition from her old school"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does Leo's perspective on Stargirl differ from most students?",
+          "options": [
+            "He dislikes her completely",
+            "He is both fascinated and confused, drawn to understand her",
+            "He thinks she should leave the school",
+            "He has no interest in her at all"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "review-3",
+      "title": "Review Quiz 3",
+      "subtitle": "Ch 1-9",
+      "afterChapter": 9,
+      "unlockCondition": 9,
+      "questions": [
+        {
+          "question": "How has the school community's reaction to Stargirl evolved through these chapters?",
+          "options": [
+            "Constant rejection from the beginning",
+            "From curiosity and wariness to growing acceptance as she becomes popular",
+            "Complete indifference throughout",
+            "Immediate worship from day one"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Stargirl's behavior at the football games reveal about her character?",
+          "options": [
+            "She hates sports",
+            "She cheers for both teams because she cares about everyone's joy",
+            "She only supports the winning team",
+            "She doesn't attend games"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Why might Leo feel conflicted about his growing feelings for Stargirl?",
+          "options": [
+            "He doesn't like her personality",
+            "He's torn between attraction to her uniqueness and fear of standing out",
+            "His parents forbid him from dating",
+            "He's already in a relationship"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What role does the 'we' narrative voice play in telling this story?",
+          "options": [
+            "It's just Leo's personal perspective",
+            "It represents the collective consciousness of the student body",
+            "It refers to Leo and Kevin only",
+            "It's a grammatical error"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does Stargirl challenge the typical high school social hierarchy?",
+          "options": [
+            "She tries to become the most popular student",
+            "She ignores social boundaries and treats everyone equally",
+            "She only talks to popular students",
+            "She creates her own exclusive group"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What is significant about Stargirl knowing personal details about other students?",
+          "options": [
+            "She's spying on them",
+            "She genuinely pays attention to people others overlook",
+            "Teachers tell her everything",
+            "She reads the school newspaper"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "review-4",
+      "title": "Review Quiz 4",
+      "subtitle": "Ch 1-12",
+      "afterChapter": 12,
+      "unlockCondition": 12,
+      "questions": [
+        {
+          "question": "How does the Hot Seat interview change Stargirl's position at school?",
+          "options": [
+            "It has no effect",
+            "It turns the school against her as they see her 'weirdness' up close",
+            "It makes everyone love her immediately",
+            "It gets her expelled"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Leo's growing interest in Stargirl suggest about his character development?",
+          "options": [
+            "He's becoming more conformist",
+            "He's beginning to question the value of fitting in",
+            "He wants to change her",
+            "He's only interested in her popularity"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Why does the school's initial acceptance of Stargirl begin to waver?",
+          "options": [
+            "She starts being mean to people",
+            "Her unconventional behavior becomes threatening to their sense of normalcy",
+            "She fails all her classes",
+            "She moves away"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Stargirl's enchanted place represent in the story?",
+          "options": [
+            "A hiding spot from bullies",
+            "A place of spiritual connection and self-reflection",
+            "Her secret meeting spot with friends",
+            "Where she keeps her pet rat"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does Archie serve as a mentor figure in the story?",
+          "options": [
+            "He teaches Stargirl to be more normal",
+            "He provides wisdom and understanding about Stargirl's uniqueness",
+            "He's her math tutor",
+            "He doesn't appear in these chapters"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What tension is building between Leo's personal desires and social pressures?",
+          "options": [
+            "He wants to leave school",
+            "He's attracted to Stargirl but fears social rejection",
+            "He wants to join a sports team",
+            "He's worried about his grades"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "review-5",
+      "title": "Review Quiz 5",
+      "subtitle": "Ch 1-15",
+      "afterChapter": 15,
+      "unlockCondition": 15,
+      "questions": [
+        {
+          "question": "How does Leo and Stargirl's relationship develop through these chapters?",
+          "options": [
+            "They remain just acquaintances",
+            "They become close, with Leo drawn deeper into her world",
+            "They become enemies",
+            "Leo avoids her completely"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does the shunning of Stargirl reveal about the school community?",
+          "options": [
+            "They are very welcoming",
+            "They value conformity over individuality",
+            "They support everyone equally",
+            "They don't care about social status"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Why does Leo struggle with his relationship with Stargirl?",
+          "options": [
+            "He doesn't like her anymore",
+            "He fears being shunned himself for associating with her",
+            "His parents disapprove",
+            "She lives too far away"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Stargirl's wagon represent symbolically?",
+          "options": [
+            "Just a mode of transportation",
+            "Her connection to childhood innocence and doing things her own way",
+            "A gift from her parents",
+            "Something she's embarrassed about"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How has the basketball team's success affected Stargirl's popularity?",
+          "options": [
+            "It had no effect",
+            "Initially boosted her popularity, then complicated things",
+            "Made everyone love her permanently",
+            "Got her kicked off the cheerleading squad"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What internal conflict is Leo experiencing about identity?",
+          "options": [
+            "Whether to change schools",
+            "Whether to be true to himself or conform to fit in",
+            "Whether to play sports",
+            "Whether to study harder"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "review-6",
+      "title": "Review Quiz 6",
+      "subtitle": "Ch 1-18",
+      "afterChapter": 18,
+      "unlockCondition": 18,
+      "questions": [
+        {
+          "question": "What choice does Leo ultimately make regarding his relationship with Stargirl?",
+          "options": [
+            "He fully embraces her uniqueness",
+            "He asks her to change to fit in",
+            "He breaks up with her immediately",
+            "He transfers to another school"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does Stargirl respond to Leo's request that she change?",
+          "options": [
+            "She refuses and leaves him",
+            "She tries to become 'Susan' to please him and fit in",
+            "She ignores him completely",
+            "She gets angry and confronts the school"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Stargirl's transformation into 'Susan' represent?",
+          "options": [
+            "Her true personality emerging",
+            "The sacrifice of identity for acceptance",
+            "A permanent positive change",
+            "What she was always meant to be"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Why does becoming 'Susan' fail to win acceptance for Stargirl?",
+          "options": [
+            "Susan is even more unpopular",
+            "The school has already decided to reject her, and conformity can't undo that",
+            "She doesn't try hard enough",
+            "Susan is too mean to people"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Leo's behavior reveal about peer pressure and love?",
+          "options": [
+            "Love always conquers peer pressure",
+            "He lets fear of social rejection influence how he treats someone he cares about",
+            "Peer pressure doesn't affect relationships",
+            "He's completely immune to peer pressure"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does the oratorical contest fit into Stargirl's story arc?",
+          "options": [
+            "It's unrelated to the main story",
+            "It gives her a chance to succeed or fail on a public stage",
+            "She doesn't participate",
+            "It's only about academics"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "review-7",
+      "title": "Review Quiz 7",
+      "subtitle": "Ch 1-21",
+      "afterChapter": 21,
+      "unlockCondition": 21,
+      "questions": [
+        {
+          "question": "What happens at the state oratorical contest?",
+          "options": [
+            "Stargirl doesn't show up",
+            "Stargirl wins but the school still doesn't accept her",
+            "Stargirl loses badly",
+            "The contest is cancelled"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Why doesn't winning the contest change how the school treats Stargirl?",
+          "options": [
+            "They didn't know about it",
+            "The resentment runs deeper than any single achievement can fix",
+            "They thought she cheated",
+            "The contest wasn't important"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What realization does Stargirl come to about trying to be 'Susan'?",
+          "options": [
+            "She should try harder",
+            "It's not worth losing herself to gain acceptance that may never come",
+            "Susan is better than Stargirl",
+            "She should leave the school"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does Leo's guilt manifest during this period?",
+          "options": [
+            "He feels no guilt at all",
+            "He struggles with having asked her to change who she was",
+            "He becomes more popular",
+            "He joins the sports team"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does the bunny hop scene at the dance represent?",
+          "options": [
+            "Just a fun dance moment",
+            "Stargirl reclaiming her true self and spirit despite rejection",
+            "A new dance trend at school",
+            "Everyone finally accepting her"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What lesson emerges about authenticity versus acceptance?",
+          "options": [
+            "Always change for others",
+            "Being true to yourself matters more than being accepted by everyone",
+            "Acceptance is always more important",
+            "Authenticity doesn't matter"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "review-8",
+      "title": "Review Quiz 8",
+      "subtitle": "Ch 1-24",
+      "afterChapter": 24,
+      "unlockCondition": 24,
+      "questions": [
+        {
+          "question": "What happens to Stargirl after the spring dance?",
+          "options": [
+            "She becomes the most popular student",
+            "She disappears from school and Leo's life",
+            "She stays exactly the same",
+            "She becomes class president"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does Leo feel after Stargirl is gone?",
+          "options": [
+            "Relieved",
+            "Filled with regret and longing for what he lost",
+            "Indifferent",
+            "Angry at her"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Leo learn too late about Stargirl?",
+          "options": [
+            "That she was pretending to be unique",
+            "That he should have valued her uniqueness instead of trying to change her",
+            "That she was actually popular",
+            "That she was from another school"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How has the experience with Stargirl changed Leo?",
+          "options": [
+            "He becomes more conformist",
+            "He begins to see the world differently and question conformity",
+            "He forgets about her immediately",
+            "He becomes popular"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What role does memory play in the later chapters?",
+          "options": [
+            "Leo tries to forget everything",
+            "Leo treasures memories of Stargirl and reflects on their meaning",
+            "Memories aren't mentioned",
+            "Other students remember her fondly"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What is the significance of the porcupine necktie at this point in the story?",
+          "options": [
+            "It's just an old memory",
+            "It connects to how Stargirl, like the tie, was a unique gift Leo didn't fully appreciate",
+            "Leo throws it away",
+            "It has no significance"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "review-9",
+      "title": "Review Quiz 9",
+      "subtitle": "Ch 1-27",
+      "afterChapter": 27,
+      "unlockCondition": 27,
+      "questions": [
+        {
+          "question": "What is the overall message about being different in society?",
+          "options": [
+            "Different people should change to fit in",
+            "Society often punishes uniqueness but individuals shouldn't lose themselves",
+            "Being different is always bad",
+            "Everyone should be exactly the same"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does the story critique teenage social dynamics?",
+          "options": [
+            "It shows they're perfectly healthy",
+            "It exposes how fear of standing out leads to cruelty and conformity",
+            "It doesn't address social dynamics",
+            "It shows teenagers are always kind"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Leo's reflection on the past suggest about personal growth?",
+          "options": [
+            "People never change",
+            "We often don't recognize what matters until it's gone",
+            "Growth isn't possible",
+            "The past doesn't matter"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does Archie's wisdom connect to the story's themes?",
+          "options": [
+            "He encourages conformity",
+            "He helps Leo understand that rare, authentic people are precious",
+            "He doesn't contribute to the themes",
+            "He tells Leo to forget Stargirl"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Stargirl's lasting impact on MAHS represent?",
+          "options": [
+            "She had no impact",
+            "Even brief encounters with authentic people can leave lasting impressions",
+            "The school forgot her immediately",
+            "Everyone became like her"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Why does the story continue after Stargirl leaves?",
+          "options": [
+            "To fill pages",
+            "To show how her absence affects Leo and what he learns from it",
+            "Because the author forgot to end it",
+            "To introduce new characters"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "review-10",
+      "title": "Review Quiz 10",
+      "subtitle": "Ch 1-30",
+      "afterChapter": 30,
+      "unlockCondition": 30,
+      "questions": [
+        {
+          "question": "What lasting lesson does Leo carry from his time with Stargirl?",
+          "options": [
+            "To always fit in",
+            "To appreciate and embrace uniqueness in others and himself",
+            "To avoid unusual people",
+            "To never fall in love"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does the ending suggest hope despite the bittersweet outcome?",
+          "options": [
+            "It doesn't suggest hope",
+            "Leo has been changed for the better and carries Stargirl's spirit forward",
+            "Everything goes back to exactly how it was",
+            "Leo becomes bitter"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does the story suggest about the relationship between love and acceptance?",
+          "options": [
+            "Love requires changing the other person",
+            "True love means accepting someone as they are",
+            "Acceptance isn't important in love",
+            "Love and acceptance are unrelated"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Why might Stargirl be considered a timeless character?",
+          "options": [
+            "She follows all trends",
+            "She represents the universal struggle between individuality and conformity",
+            "She's very ordinary",
+            "She's exactly like everyone else"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What critique of school culture emerges from the novel?",
+          "options": [
+            "Schools are perfect",
+            "Schools can become echo chambers that punish those who don't conform",
+            "Schools encourage individuality",
+            "The novel doesn't critique schools"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does Leo's narration style affect our understanding of events?",
+          "options": [
+            "It's completely objective",
+            "His regret colors the memories, making us feel the loss he feels",
+            "He's an unreliable narrator who lies",
+            "His style has no effect"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    },
+    {
+      "id": "review-11",
+      "title": "Final Review",
+      "subtitle": "Ch 1-34",
+      "afterChapter": 34,
+      "unlockCondition": 34,
+      "questions": [
+        {
+          "question": "What is the central theme of 'Stargirl'?",
+          "options": [
+            "The importance of being popular",
+            "The tension between individuality and conformity, and the cost of both",
+            "How to succeed in high school",
+            "The value of sports"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does Leo's character arc reflect the novel's message?",
+          "options": [
+            "He doesn't change at all",
+            "He moves from conformity to understanding the value of authenticity",
+            "He becomes more conformist",
+            "He leaves school"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What makes Stargirl an enduring symbol in literature?",
+          "options": [
+            "Her ordinary nature",
+            "She embodies the rare person who lives authentically despite social pressure",
+            "Her popularity",
+            "Her athletic abilities"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does the novel suggest about regret?",
+          "options": [
+            "Regret is meaningless",
+            "Regret can be a teacher that helps us grow and appreciate what we had",
+            "We should never feel regret",
+            "Regret only makes us sad"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "How does the novel's ending impact its overall meaning?",
+          "options": [
+            "The happy ending suggests everything works out",
+            "The bittersweet ending emphasizes that some lessons come at a cost",
+            "The ending is irrelevant",
+            "It suggests the story continues with a sequel"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does Stargirl teach us about kindness?",
+          "options": [
+            "Kindness is weakness",
+            "Genuine kindness given freely is rare and valuable, even when unreciprocated",
+            "Only be kind to friends",
+            "Kindness should be calculated"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "Why is the porcupine necktie a fitting symbol for the story's beginning and end?",
+          "options": [
+            "It's just a coincidence",
+            "Like Stargirl, it represents something unique that Leo didn't fully appreciate until later",
+            "It has no symbolic meaning",
+            "Because Leo likes porcupines"
+          ],
+          "correctIndex": 1
+        },
+        {
+          "question": "What does the novel suggest about the power of memory?",
+          "options": [
+            "Memories fade and become meaningless",
+            "Memories of transformative people and moments can guide us long after they're gone",
+            "We should try to forget everything",
+            "Memories are always accurate"
+          ],
+          "correctIndex": 1
+        }
+      ]
+    }
+  ]
+}
