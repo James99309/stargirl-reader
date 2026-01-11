@@ -1,17 +1,31 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { fetchUserByUsername } from '../../services/sheetApi';
+import type { LeaderboardEntry } from '../../types';
 
 interface LoginScreenProps {
-  onLogin: (username: string) => void;
+  onLogin: (username: string, existingUser?: LeaderboardEntry) => void;
 }
 
 export function LoginScreen({ onLogin }: LoginScreenProps) {
   const [name, setName] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (name.trim()) {
-      onLogin(name.trim());
+    if (!name.trim()) return;
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const existingUser = await fetchUserByUsername(name.trim());
+      onLogin(name.trim(), existingUser || undefined);
+    } catch {
+      setError('Network error. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -36,19 +50,23 @@ export function LoginScreen({ onLogin }: LoginScreenProps) {
             placeholder="Your name"
             className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#58CC02] focus:outline-none text-lg mb-4"
             autoFocus
+            disabled={isLoading}
           />
+          {error && (
+            <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+          )}
           <motion.button
             type="submit"
-            disabled={!name.trim()}
+            disabled={!name.trim() || isLoading}
             className={`w-full py-4 rounded-xl font-bold text-lg transition-colors ${
-              name.trim()
+              name.trim() && !isLoading
                 ? 'bg-[#58CC02] text-white'
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
-            whileHover={name.trim() ? { scale: 1.02 } : {}}
-            whileTap={name.trim() ? { scale: 0.98 } : {}}
+            whileHover={name.trim() && !isLoading ? { scale: 1.02 } : {}}
+            whileTap={name.trim() && !isLoading ? { scale: 0.98 } : {}}
           >
-            Start Reading
+            {isLoading ? 'Loading...' : 'Start Reading'}
           </motion.button>
         </form>
       </motion.div>

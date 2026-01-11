@@ -14,6 +14,7 @@ import { LoginScreen } from './components/Auth/LoginScreen';
 import { ShopView } from './components/Shop/ShopView';
 import { useProgressStore } from './stores/progressStore';
 import { recordProgress } from './services/sheetApi';
+import type { LeaderboardEntry } from './types';
 import bookData from './data/stargirl.json';
 import reviewQuizzesData from './data/reviewQuizzes.json';
 import type { ReviewQuiz } from './types';
@@ -43,7 +44,7 @@ function App() {
   const [selectedReviewQuiz, setSelectedReviewQuiz] = useState<ReviewQuiz | null>(null);
   const [showReviewQuiz, setShowReviewQuiz] = useState(false);
 
-  const { username, setUsername, checkAndRestoreHearts, darkMode, claimLoginBonus, checkSuperMemberStatus } = useProgressStore();
+  const { username, setUsername, checkAndRestoreHearts, darkMode, claimLoginBonus, checkSuperMemberStatus, restoreFromServer } = useProgressStore();
   const [showLoginBonus, setShowLoginBonus] = useState(false);
   const [loginBonusXP, setLoginBonusXP] = useState(0);
   const chapters = bookData.chapters as Chapter[];
@@ -77,8 +78,16 @@ function App() {
     }
   }, [username, checkSuperMemberStatus, claimLoginBonus]);
 
-  const handleLogin = (name: string) => {
+  const handleLogin = (name: string, existingUser?: LeaderboardEntry) => {
     setUsername(name);
+    // Restore data if user exists
+    if (existingUser) {
+      restoreFromServer({
+        totalXP: existingUser.totalXP,
+        level: existingUser.level,
+        isSuperMember: existingUser.isSuperMember,
+      });
+    }
     // Record login
     recordProgress({
       username: name,

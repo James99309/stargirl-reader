@@ -35,6 +35,7 @@ interface ProgressState extends UserProgress {
   checkSuperMemberStatus: () => void; // Check if super membership has expired
   completeReviewQuiz: (quizId: string) => void; // Complete a review quiz
   claimLoginBonus: () => number; // Claim daily login bonus for super members, returns XP earned
+  restoreFromServer: (data: { totalXP: number; level: number; isSuperMember?: boolean }) => void; // Restore user data from server
 }
 
 const initialState: UserProgress = {
@@ -312,6 +313,15 @@ export const useProgressStore = create<ProgressState>()(
         set({ lastLoginBonusDate: today });
         addXP(50); // Super VIP daily login bonus
         return 50;
+      },
+
+      restoreFromServer: (data) => {
+        set({
+          totalXP: data.totalXP,
+          isSuperMember: data.isSuperMember || false,
+          // If super member, set expiry to 30 days from now (approximate)
+          superMemberExpiry: data.isSuperMember ? Date.now() + SUPER_MEMBER_DURATION : null,
+        });
       },
     }),
     {

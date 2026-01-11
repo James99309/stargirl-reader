@@ -26,6 +26,8 @@ export function ProfileView() {
     setDailyGoal,
     resetProgress,
     exchangeXPForHeart,
+    logout,
+    username,
   } = useProgressStore();
 
   const canExchangeHeart = totalXP >= 100 && hearts < maxHearts;
@@ -220,6 +222,15 @@ export function ProfileView() {
             })}
           </div>
         </motion.div>
+
+        {/* Logout button */}
+        <motion.button
+          onClick={logout}
+          className="w-full py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium rounded-xl mb-3"
+          whileTap={{ scale: 0.98 }}
+        >
+          Logout ({username})
+        </motion.button>
 
         {/* Reset button */}
         <motion.button

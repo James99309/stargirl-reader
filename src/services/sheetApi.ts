@@ -59,3 +59,14 @@ export async function fetchLeaderboard(): Promise<LeaderboardEntry[]> {
     return [];
   }
 }
+
+export async function fetchUserByUsername(username: string): Promise<LeaderboardEntry | null> {
+  try {
+    const leaderboard = await fetchLeaderboard();
+    const user = leaderboard.find(entry => entry.username === username);
+    return user || null;
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    return null;
+  }
+}
